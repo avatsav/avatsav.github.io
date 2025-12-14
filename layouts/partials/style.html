@@ -12,11 +12,10 @@
     --font-scale: 1em;
 
     /* Colors */
-    --background-color: #fff;
-    --heading-color: #222;
-    --text-color: #444;
-    --link-color: #318ce7;
-    --blockquote-color: #222;
+    --background-color: #fefcf9;
+    --heading-color: #2a2420;
+    --text-color: #4a4540;
+    --link-color: #d97706;
 
     /* Computed Colors */
     --surface-color: color-mix(
@@ -34,6 +33,11 @@
       var(--text-color) 60%,
       var(--background-color)
     );
+    --blockquote-color: color-mix(
+      in srgb,
+      var(--link-color) 70%,
+      var(--heading-color)
+    );
   }
 
   /* Dark theme */
@@ -43,18 +47,6 @@
     --text-color: #ddd;
     --link-color: #afdbf5;
     --blockquote-color: #ccc;
-  }
-
-  /* Dark theme - system preference (when no manual selection) */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) {
-      --background-color: #181c20;
-      --heading-color: #eee;
-      --text-color: #ddd;
-      --link-color: #7ca8df;
-      --blockquote-color: #ccc;
-      --surface-color: #252a2e;
-    }
   }
 
   /* ===== Base Styles ===== */

@@ -1,11 +1,17 @@
 <style>
+  /* ===== CSS Variables ===== */
   :root {
+    /* Layout */
     --width: 720px;
+    --space: 1.5rem;
+    --radius: 5px;
+
+    /* Typography */
     --font-main: "Geist", sans-serif;
     --font-secondary: "Geist", sans-serif;
     --font-scale: 1em;
-    --space: 1.5rem;
-    --radius: 5px;
+
+    /* Colors */
     --background-color: #fff;
     --heading-color: #222;
     --text-color: #444;
@@ -13,6 +19,7 @@
     --blockquote-color: #222;
     --surface-color: #f5f5f5;
 
+    /* Computed Colors */
     --visited-color: color-mix(
       in srgb,
       var(--link-color) 50%,
@@ -36,20 +43,26 @@
     }
   }
 
+  /* ===== Base Styles ===== */
   body {
     font-family: var(--font-secondary), sans-serif;
     font-size: var(--font-scale);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
     margin: auto;
     padding: 20px;
     max-width: var(--width);
     text-align: left;
-    background-color: var(--background-color);
     word-wrap: break-word;
     overflow-wrap: break-word;
-    line-height: 1.6;
-    color: var(--text-color);
   }
 
+  main {
+    line-height: 1.6;
+  }
+
+  /* ===== Typography ===== */
   h1,
   h2,
   h3,
@@ -85,6 +98,18 @@
     margin-block: 0 var(--space);
   }
 
+  strong,
+  b {
+    color: var(--heading-color);
+  }
+
+  time {
+    font-style: normal;
+    font-size: 15px;
+    color: var(--muted-color);
+  }
+
+  /* ===== Links ===== */
   a {
     color: var(--link-color);
     cursor: pointer;
@@ -99,39 +124,24 @@
     margin-right: 8px;
   }
 
-  strong,
-  b {
-    color: var(--heading-color);
+  /* ===== Lists ===== */
+  ul,
+  ol {
+    margin-block: var(--space);
+    padding-inline-start: 1.6rem;
   }
 
-  button {
-    margin: 0;
-    cursor: pointer;
+  li + li {
+    margin-block-start: 0.25rem;
   }
 
-  time {
-    font-style: normal;
-    font-size: 15px;
-    color: var(--muted-color);
+  li > ul,
+  li > ol {
+    margin-block: 0.25rem;
+    margin-inline: 0;
   }
 
-  main {
-    line-height: 1.6;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  hr {
-    border: 0;
-    border-top: 1px dashed;
-  }
-
-  img {
-    max-width: 100%;
-  }
-
+  /* ===== Blockquotes ===== */
   blockquote {
     margin-block: calc(var(--space) * 1.25);
     margin-inline: 0;
@@ -162,20 +172,65 @@
     content: "— ";
   }
 
-  ul,
-  ol {
-    margin-block: var(--space);
-    padding-inline-start: 1.6rem;
+  /* ===== Code ===== */
+  code {
+    font-family: monospace;
+    padding: 2px;
+    border-radius: var(--radius);
+    background: var(--surface-color);
   }
 
-  li + li {
-    margin-block-start: 0.25rem;
+  .highlight code,
+  pre code {
+    background: none;
+    padding: 0;
   }
 
-  li > ul,
-  li > ol {
-    margin-block: 0.25rem;
-    margin-inline: 0;
+  .highlight,
+  .code {
+    border-radius: var(--radius);
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    overflow-x: auto;
+  }
+
+  .highlight pre,
+  .highlight code,
+  pre {
+    border-radius: var(--radius);
+  }
+
+  /* ===== Media ===== */
+  img {
+    max-width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  /* ===== Interactive Elements ===== */
+  button {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  /* ===== Layout Components ===== */
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+  }
+
+  .inline {
+    width: auto !important;
   }
 
   footer {
@@ -189,40 +244,7 @@
     margin-block: 0.5rem;
   }
 
-  .title:hover {
-    text-decoration: none;
-  }
-
-  .title h1 {
-    font-size: 1.5em;
-  }
-
-  .inline {
-    width: auto !important;
-  }
-
-  code {
-    font-family: monospace;
-    padding: 2px;
-    border-radius: var(--radius);
-    background: var(--surface-color);
-  }
-
-  .highlight,
-  .code {
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    overflow-x: auto;
-  }
-
-  .highlight pre,
-  .highlight code,
-  pre {
-    border-radius: var(--radius);
-    background: none;
-  }
-
-  /* blog post list */
+  /* ===== Blog Post List ===== */
   ul.blog-posts {
     list-style-type: none;
     margin-block: var(--space);

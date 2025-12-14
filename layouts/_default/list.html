@@ -25,14 +25,12 @@
       {{ end }}
     </ul>
     {{ if not .Data.Singular }}
-      <small>
-        <div class="tags-list">
-          {{ range .Site.Taxonomies.tags }}
-            <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a>
-            &nbsp;
-          {{ end }}
-        </div>
-      </small>
+      <div class="tags-list">
+        {{ range .Site.Taxonomies.tags }}
+          <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a>
+          &nbsp;
+        {{ end }}
+      </div>
     {{ end }}
   </content>
 {{ end }}

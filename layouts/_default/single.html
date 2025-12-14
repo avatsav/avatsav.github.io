@@ -23,9 +23,10 @@
   {{ end }}
 
 
-  <p>
+  <div class="tags-list">
     {{ range (.GetTerms "tags") }}
       <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+      &nbsp;
     {{ end }}
-  </p>
+  </div>
 {{ end }}

@@ -1,30 +1,39 @@
 <style>
   :root {
     --width: 720px;
-    --font-main: Verdana, sans-serif;
-    --font-secondary: Verdana, sans-serif;
+    --font-main: "Geist", sans-serif;
+    --font-secondary: "Geist", sans-serif;
     --font-scale: 1em;
     --background-color: #fff;
     --heading-color: #222;
     --text-color: #444;
-    --link-color: #3273dc;
-    --visited-color: #8b6fcb;
+    --link-color: #3a6fc2;
     --blockquote-color: #222;
+
+    --visited-color: color-mix(
+      in srgb,
+      var(--link-color) 50%,
+      var(--text-color)
+    );
+    --muted-color: color-mix(
+      in srgb,
+      var(--text-color) 60%,
+      var(--background-color)
+    );
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --background-color: #01242e;
+      --background-color: #181c20;
       --heading-color: #eee;
       --text-color: #ddd;
-      --link-color: #8cc2dd;
-      --visited-color: #8b6fcb;
+      --link-color: #3a6fc2;
       --blockquote-color: #ccc;
     }
   }
 
   body {
-    font-family: var(--font-secondary);
+    font-family: var(--font-secondary), sans-serif;
     font-size: var(--font-scale);
     margin: auto;
     padding: 20px;
@@ -43,8 +52,24 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-main);
+    font-family: var(--font-main), sans-serif;
     color: var(--heading-color);
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
   }
 
   a {
@@ -72,9 +97,9 @@
   }
 
   time {
-    font-family: monospace;
     font-style: normal;
     font-size: 15px;
+    color: var(--muted-color);
   }
 
   main {
@@ -149,5 +174,4 @@
   ul.blog-posts li a:visited {
     color: var(--visited-color);
   }
-
 </style>

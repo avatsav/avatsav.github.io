@@ -5,11 +5,11 @@
   "description": "🧸 A [Hugo](https://gohugo.io/)-theme based on [Bear Blog](https://bearblog.dev).",
   "main": "index.js",
   "devDependencies": {
-    "js-beautify": "^1.15.4"
+    "prettier": "^3.4.2"
   },
   "scripts": {
-    "test": "npm run beautify",
-    "beautify": "js-beautify layouts/**/*.html -r"
+    "format": "prettier --write layouts/**/*.html",
+    "format:check": "prettier --check layouts/**/*.html"
   },
   "repository": {
     "type": "git",

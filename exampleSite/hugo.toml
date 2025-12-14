@@ -54,13 +54,13 @@ ignoreErrors = ["error-disable-taxonomy"]
   # file. See [Hugo's Format function docs](https://gohugo.io/functions/format/)
   # for details. An example TOML config that uses [ISO
   # 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
-  # dateFormat = "2006-01-02"
+  dateFormat = "02 Jan 2006"
 
 # Configure markup highlighter to match "Bearblog" aesthetics, see
 # https://gohugo.io/configuration/markup/#highlight
 [markup]
   [markup.highlight]
-    style = 'friendly'
+    style = 'github-dark'
     lineNos = true
     lineNumbersInTable = false
     codeFences = true

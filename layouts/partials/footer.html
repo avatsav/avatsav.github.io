@@ -1,5 +1,5 @@
 <p>
-  <button id="theme-toggle" aria-label="Toggle theme"></button>
+  <a href="#" id="theme-toggle" aria-label="Toggle theme"></a>
   ·
   <a href="{{ "index.xml" | relURL }}">RSS feed</a>
 </p>
@@ -22,7 +22,8 @@
     }
 
     // Toggle theme
-    function toggleTheme() {
+    function toggleTheme(e) {
+      e.preventDefault();
       const currentTheme = html.getAttribute("data-theme");
       const newTheme = currentTheme === "dark" ? "light" : "dark";
       html.setAttribute("data-theme", newTheme);

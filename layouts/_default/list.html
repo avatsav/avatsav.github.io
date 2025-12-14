@@ -26,7 +26,7 @@
     </ul>
     {{ if not .Data.Singular }}
       <small>
-        <div>
+        <div class="tags-list">
           {{ range .Site.Taxonomies.tags }}
             <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a>
             &nbsp;

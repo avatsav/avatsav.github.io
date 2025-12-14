@@ -6,10 +6,10 @@ baseURL = "https://example.com"
 theme = 'hugo-bearblog'
 
 # Basic metadata configuration for your blog.
-title = "Hugo ʕ•ᴥ•ʔ Bear Blog"
-author = "Jane Doe"
-copyright = "Copyright © 2020, Jane Doe."
-languageCode = "en-US"
+title = "Abhi's logbook"
+author = "Abhijith Srivatsav"
+copyright = "Copyright © 2026, Abhijith Srivatsav."
+languageCode = "en-GB"
 
 # Generate a nice robots.txt for SEO
 enableRobotsTXT = true
@@ -38,7 +38,7 @@ ignoreErrors = ["error-disable-taxonomy"]
   # Another "title" :-). This one is used as the site_name on the Hugo's internal
   # opengraph structured data template.
   # See https://ogp.me/ and https://gohugo.io/templates/internal#open-graph.
-  title = "Hugo ʕ•ᴥ•ʔ Bear"
+  title = "Abhi's logbook"
 
   # This theme will, by default, inject a made-with-line at the bottom of the page.
   # You can turn it off, but we would really appreciate if you don’t :-).
@@ -54,7 +54,7 @@ ignoreErrors = ["error-disable-taxonomy"]
   # file. See [Hugo's Format function docs](https://gohugo.io/functions/format/)
   # for details. An example TOML config that uses [ISO
   # 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
-  dateFormat = "02 Jan 2006"
+  dateFormat = "02 Jan, 2006"
 
 # Configure markup highlighter to match "Bearblog" aesthetics, see
 # https://gohugo.io/configuration/markup/#highlight

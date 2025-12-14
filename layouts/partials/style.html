@@ -168,30 +168,17 @@
   }
 
   /* ===== Code ===== */
-  code {
-    font-family: monospace;
-    padding: 2px;
+  :not(pre) > code {
+    padding: 2px 4px;
     border-radius: var(--radius);
     background: var(--surface-color);
   }
 
-  .highlight {
-    border-radius: var(--radius);
-    overflow-x: auto;
-  }
-
-  .highlight pre,
-  pre {
-    margin: 0;
+  .highlight pre {
     padding: 1rem;
-    width: max-content;
-    min-width: 100%;
-  }
-
-  .highlight code,
-  pre code {
-    background: none;
-    padding: 0;
+    border-radius: var(--radius);
+    display: block;
+    overflow-x: auto;
   }
 
   /* ===== Media ===== */

@@ -5,6 +5,8 @@
       <small>
         <a href="{{ "blog" | relURL }}">Remove filter</a>
       </small>
+    {{ else }}
+      <h1>{{ .Title }}</h1>
     {{ end }}
     <ul class="blog-posts">
       {{ range .Pages }}

@@ -4,6 +4,7 @@
     --font-main: "Geist", sans-serif;
     --font-secondary: "Geist", sans-serif;
     --font-scale: 1em;
+    --space: 1.5rem;
     --background-color: #fff;
     --heading-color: #222;
     --text-color: #444;
@@ -42,7 +43,7 @@
     background-color: var(--background-color);
     word-wrap: break-word;
     overflow-wrap: break-word;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--text-color);
   }
 
@@ -54,6 +55,7 @@
   h6 {
     font-family: var(--font-main), sans-serif;
     color: var(--heading-color);
+    margin-block: 2rem 0.75rem;
   }
 
   h1 {
@@ -70,6 +72,14 @@
 
   h4 {
     font-size: 1.1rem;
+  }
+
+  p {
+    margin-block: var(--space);
+  }
+
+  h1 + p {
+    margin-block: 0 var(--space);
   }
 
   a {
@@ -130,6 +140,12 @@
     color: var(--blockquote-color);
     padding-left: 20px;
     font-style: italic;
+    margin-block: var(--space);
+  }
+
+  ul,
+  ol {
+    margin-block: var(--space);
   }
 
   footer {
@@ -165,10 +181,16 @@
 
   ul.blog-posts li {
     display: flex;
+    align-items: baseline;
+    gap: 1.3rem;
+  }
+
+  ul.blog-posts li + li {
+    margin-block-start: 0.25rem;
   }
 
   ul.blog-posts li span {
-    flex: 0 0 130px;
+    flex-shrink: 0;
   }
 
   ul.blog-posts li a:visited {

@@ -1,6 +1,32 @@
 {
+  "plugins": [
+    "prettier-plugin-hugo-post",
+    "prettier-plugin-go-template"
+  ],
   "tabWidth": 2,
   "useTabs": false,
   "endOfLine": "lf",
-  "htmlWhitespaceSensitivity": "ignore"
+  "htmlWhitespaceSensitivity": "ignore",
+  "overrides": [
+    {
+      "files": [
+        "content/**/*.md",
+        "*.md"
+      ],
+      "options": {
+        "parser": "hugo-post",
+        "printWidth": 100,
+        "proseWrap": "preserve"
+      }
+    },
+    {
+      "files": [
+        "layouts/**/*.html",
+        "*.html"
+      ],
+      "options": {
+        "parser": "go-template"
+      }
+    }
+  ]
 }

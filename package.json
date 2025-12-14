@@ -5,7 +5,9 @@
   "description": "🧸 A [Hugo](https://gohugo.io/)-theme based on [Bear Blog](https://bearblog.dev).",
   "main": "index.js",
   "devDependencies": {
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "prettier-plugin-go-template": "^0.0.15",
+    "prettier-plugin-hugo-post": "^0.4.1"
   },
   "scripts": {
     "format": "prettier --write layouts/**/*.html",

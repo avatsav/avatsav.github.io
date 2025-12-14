@@ -6,17 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{- partial "favicon.html" . -}}
     <title>
-      {{- block "title" . }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title
-      }}{{- end }}
+      {{- block "title" . }}
+        {{ with .Title }}{{ . }} |{{ end }}{{ .Site.Title }}
+      {{- end }}
     </title>
 
     {{- partial "seo_tags.html" . -}}
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
-    {{ with .OutputFormats.Get "rss" -}} {{ printf `
-    <link rel="%s" type="%s" href="%s" title="%s" />
-    ` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }} {{ end -}} {{-
-    partial "style.html" . -}}
+    {{ with .OutputFormats.Get "rss" -}}
+      {{ printf `
+        <link rel="%s" type="%s" href="%s" title="%s" />
+        ` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML
+      }}
+    {{ end -}}
+    {{- partial "style.html" . -}}
+
 
     <!-- A partial to be overwritten by the user.
   Simply place a custom_head.html into

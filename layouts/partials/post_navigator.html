@@ -3,17 +3,17 @@
 >
   <p>
     {{ if .PrevInSection }}
-    <a href="{{ .PrevInSection.Permalink }}"><< Previous Post</a>
+      <a href="{{ .PrevInSection.Permalink }}"><< Previous Post</a>
     {{ else }}
-    <strike><< Previous Post</strike>
+      <strike><< Previous Post</strike>
     {{ end }}
   </p>
   <p>|</p>
   <p>
     {{ if .NextInSection }}
-    <a href="{{ .NextInSection.Permalink }}">Next Post >></a>
+      <a href="{{ .NextInSection.Permalink }}">Next Post >></a>
     {{ else }}
-    <strike>Next Post >></strike>
+      <strike>Next Post >></strike>
     {{ end }}
   </p>
 </div>

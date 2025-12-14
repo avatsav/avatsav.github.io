@@ -12,41 +12,30 @@
     --font-scale: 1em;
 
     /* Colors */
-    --background-color: #fefcf9;
-    --heading-color: #2a2420;
-    --text-color: #4a4540;
-    --link-color: #d97706;
+    --bg-color: #f6f7f8;
+    --text-color: #2f3234;
+    --link-color: #3a6fc2;
 
     /* Computed Colors */
-    --surface-color: color-mix(
-      in srgb,
-      var(--background-color) 90%,
-      var(--text-color)
-    );
+    --surface-color: color-mix(in srgb, var(--bg-color) 90%, var(--text-color));
     --visited-color: color-mix(
       in srgb,
       var(--link-color) 50%,
       var(--text-color)
     );
-    --muted-color: color-mix(
-      in srgb,
-      var(--text-color) 60%,
-      var(--background-color)
-    );
+    --muted-color: color-mix(in srgb, var(--text-color) 60%, var(--bg-color));
     --blockquote-color: color-mix(
       in srgb,
       var(--link-color) 70%,
-      var(--heading-color)
+      var(--text-color)
     );
   }
 
   /* Dark theme */
   [data-theme="dark"] {
-    --background-color: #181c20;
-    --heading-color: #eee;
-    --text-color: #ddd;
+    --bg-color: #181c20;
+    --text-color: #e1e2e3;
     --link-color: #afdbf5;
-    --blockquote-color: #ccc;
   }
 
   /* ===== Base Styles ===== */
@@ -55,7 +44,7 @@
     font-size: var(--font-scale);
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--background-color);
+    background-color: var(--bg-color);
     margin: auto;
     padding: 20px;
     max-width: var(--width);
@@ -76,7 +65,7 @@
   h5,
   h6 {
     font-family: var(--font-main), sans-serif;
-    color: var(--heading-color);
+    color: var(--text-color);
     margin-block: 2rem 0.75rem;
   }
 
@@ -106,7 +95,7 @@
 
   strong,
   b {
-    color: var(--heading-color);
+    color: var(--text-color);
   }
 
   time {
@@ -189,25 +178,30 @@
   .highlight code,
   pre code {
     background: none;
+    padding: 0;
   }
 
   .highlight,
   .code {
     border-radius: var(--radius);
-    margin-block-start: 1em;
-    margin-block-end: 1em;
     overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .highlight pre,
-  .highlight code,
   pre {
     border-radius: var(--radius);
+    background: none;
+    margin: 0;
+    padding: 1rem;
+    width: max-content;
+    min-width: 100%;
   }
 
   /* ===== Media ===== */
   img {
     max-width: 100%;
+    border-radius: var(--radius);
   }
 
   table {

@@ -61,6 +61,6 @@ ignoreErrors = ["error-disable-taxonomy"]
 [markup]
   [markup.highlight]
     style = 'github-dark'
-    lineNos = true
+    lineNos = false
     lineNumbersInTable = false
     codeFences = true

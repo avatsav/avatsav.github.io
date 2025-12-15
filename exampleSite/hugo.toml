@@ -6,7 +6,7 @@ baseURL = "https://example.com"
 theme = 'hugo-bearblog'
 
 # Basic metadata configuration for your blog.
-title = "...Abhi right back"
+title = "Abhi right back 🚴"
 author = "Abhijith Srivatsav"
 copyright = "Copyright © 2026, Abhijith Srivatsav."
 languageCode = "en-GB"
@@ -60,7 +60,7 @@ ignoreErrors = ["error-disable-taxonomy"]
 # https://gohugo.io/configuration/markup/#highlight
 [markup]
   [markup.highlight]
-    style = 'github-dark'
+    style = 'modus-vivendi'
     lineNos = false
     lineNumbersInTable = false
     codeFences = true

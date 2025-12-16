@@ -7,10 +7,17 @@
     --radius: 5px;
 
     /* Typography */
-    --font-main: "Geist", sans-serif;
-    --font-secondary: "Geist", sans-serif;
+    --font-main: Inter, sans-serif;
+    --font-secondary: Inter, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
     --font-scale: 1em;
     --font-small: 0.9rem;
+
+    /* Inter font features */
+    font-feature-settings:
+      "liga" 1,
+      "calt" 1,
+      "zero" 1;
 
     /* Computed Colors */
     --surface-color: color-mix(in srgb, var(--bg-color) 90%, var(--text-color));
@@ -36,6 +43,14 @@
     --bg-color: #1a1620;
     --text-color: #e4e1e8;
     --link-color: #a68dd4;
+  }
+
+  /* Use InterVariable for browsers that support font-variation-settings */
+  @supports (font-variation-settings: normal) {
+    :root {
+      --font-main: InterVariable, sans-serif;
+      --font-secondary: InterVariable, sans-serif;
+    }
   }
 
   /* ===== Base Styles ===== */
@@ -185,6 +200,12 @@
   }
 
   /* ===== Code ===== */
+  code,
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
   :not(pre) > code {
     padding: 2px 4px;
     border-radius: var(--radius);

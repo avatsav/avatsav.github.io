@@ -60,7 +60,7 @@ ignoreErrors = ["error-disable-taxonomy"]
 # https://gohugo.io/configuration/markup/#highlight
 [markup]
   [markup.highlight]
-    style = 'modus-vivendi'
+    style = 'rose-pine-moon' # https://xyproto.github.io/splash/docs/all.html
     lineNos = false
     lineNumbersInTable = false
     codeFences = true

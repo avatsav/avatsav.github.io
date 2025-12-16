@@ -12,11 +12,6 @@
     --font-scale: 1em;
     --font-small: 0.9rem;
 
-    /* Colors */
-    --bg-color: #f7f8f9;
-    --text-color: #25282c;
-    --link-color: #4b6f8a;
-
     /* Computed Colors */
     --surface-color: color-mix(in srgb, var(--bg-color) 90%, var(--text-color));
     --visited-color: color-mix(
@@ -24,28 +19,44 @@
       var(--link-color) 50%,
       var(--text-color)
     );
-    --muted-color: color-mix(in srgb, var(--text-color) 60%, var(--bg-color));
-    --blockquote-color: color-mix(
+    --muted-text-color: color-mix(
       in srgb,
-      var(--link-color) 70%,
-      var(--text-color)
+      var(--text-color) 60%,
+      var(--bg-color)
     );
+
+    /* Light theme */
+    --bg-color: #f5f3f7;
+    --text-color: #2e2834;
+    --link-color: #6b4fa3;
   }
 
   /* Dark theme */
   [data-theme="dark"] {
-    --bg-color: #101417;
-    --text-color: #dce2e6;
-    --link-color: #7fa6c3;
+    --bg-color: #1a1620;
+    --text-color: #e4e1e8;
+    --link-color: #a68dd4;
   }
 
   /* ===== Base Styles ===== */
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-color);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     font-family: var(--font-secondary), sans-serif;
     font-size: var(--font-scale);
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--bg-color);
     margin: auto;
     padding: 20px;
     max-width: var(--width);
@@ -71,6 +82,7 @@
     margin-block: 2rem 0.75rem;
     line-height: 1.3;
     font-weight: 600;
+    page-break-after: avoid;
   }
 
   h1 {
@@ -106,7 +118,7 @@
   time {
     font-style: normal;
     font-size: var(--font-small);
-    color: var(--muted-color);
+    color: var(--muted-text-color);
   }
 
   /* ===== Links ===== */
@@ -149,7 +161,7 @@
     background: var(--surface-color);
     border-inline-start: 3px solid var(--link-color);
     border-radius: var(--radius);
-    color: var(--muted-color);
+    color: var(--muted-text-color);
   }
 
   blockquote > *:first-child {
@@ -165,7 +177,7 @@
     margin-block-start: 0.6rem;
     font-style: normal;
     font-size: var(--font-small);
-    color: color-mix(in srgb, var(--muted-color) 70%, var(--text-color));
+    color: color-mix(in srgb, var(--muted-text-color) 70%, var(--text-color));
   }
 
   blockquote cite::before {
@@ -184,7 +196,6 @@
     border-radius: var(--radius);
     display: block;
     overflow-x: auto;
-    background: #1e2428 !important;
   }
 
   /* ===== Media ===== */
@@ -204,7 +215,7 @@
   figcaption {
     text-align: center;
     font-size: var(--font-small);
-    color: var(--muted-color);
+    color: var(--muted-text-color);
     font-style: italic;
   }
 
@@ -244,7 +255,7 @@
     margin-block-start: 4rem;
     text-align: center;
     font-size: var(--font-small);
-    color: var(--muted-color);
+    color: var(--muted-text-color);
   }
 
   footer p {

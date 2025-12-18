@@ -221,6 +221,29 @@
     overflow-x: auto;
   }
 
+  mark {
+    background: rgba(255, 150, 120, 0.4);
+    padding: 1px 3px;
+    transform: skewX(-3deg);
+    display: inline-block;
+  }
+
+  kbd {
+    font-family: var(--font-mono);
+    font-feature-settings: normal;
+    background: color-mix(in srgb, var(--text-color) 5%, transparent);
+    padding: 2px 6px;
+    margin: 0 2px;
+    font-size: calc(var(--font-scale) * 0.95);
+    border: 1px solid var(--link-color);
+    border-radius: 4px;
+    display: inline-block;
+    transform: perspective(200px) rotateX(12deg);
+    box-shadow:
+      0 3px 0 var(--link-color),
+      0 4px 4px rgba(0, 0, 0, 0.3);
+  }
+
   /* ===== Media ===== */
   img {
     max-width: 100%;

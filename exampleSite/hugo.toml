@@ -63,3 +63,5 @@ ignoreErrors = ["error-disable-taxonomy"]
     lineNos = false
     lineNumbersInTable = false
     codeFences = true
+  [markup.goldmark.renderer]
+      unsafe = true

@@ -31,6 +31,7 @@
       var(--text-color) 60%,
       var(--bg-color)
     );
+    --border: color-mix(in srgb, var(--text-color) 21%, var(--bg-color));
 
     /* Light theme */
     --bg-color: #f5f3f7;
@@ -43,6 +44,7 @@
     --bg-color: #1a1620;
     --text-color: #e4e1e8;
     --link-color: #a68dd4;
+    --border: color-mix(in srgb, var(--bg-color) 82%, var(--text-color));
   }
 
   /* Use InterVariable for browsers that support font-variation-settings */
@@ -249,8 +251,10 @@
   }
 
   hr {
-    border: 0;
-    border-top: 1px dashed;
+    margin-block: calc(var(--space) * 1.5);
+    margin-inline: 0;
+    border: none;
+    border-block-start: 1px solid var(--border);
   }
 
   /* ===== Interactive Elements ===== */

@@ -175,10 +175,10 @@
     margin-block: calc(var(--space) * 1.25);
     margin-inline: 0;
     padding: 0.9rem 1.2rem;
-    background: var(--surface-color);
+    background: color-mix(in srgb, var(--text-color) 5%, transparent);
     border-inline-start: 3px solid var(--link-color);
-    border-radius: var(--radius);
-    color: var(--muted-text-color);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--text-color);
   }
 
   blockquote > *:first-child {

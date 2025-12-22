@@ -366,4 +366,50 @@
     margin-block-start: 2rem;
     font-size: var(--font-small);
   }
+
+  /* ===== Table of Contents ===== */
+  .toc {
+    margin-block: var(--space);
+    padding: 1rem;
+    background: var(--surface-color);
+    border-radius: var(--radius);
+  }
+
+  .toc summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .toc summary:hover {
+    color: var(--link-color);
+  }
+
+  .toc #TableOfContents {
+    margin-block-start: 0.75rem;
+  }
+
+  .toc #TableOfContents ul {
+    margin-block: 0;
+    padding-inline-start: 1.2rem;
+    list-style: none;
+  }
+
+  .toc #TableOfContents > ul {
+    padding-inline-start: 0;
+  }
+
+  .toc #TableOfContents li {
+    margin-block: 0.25rem;
+  }
+
+  .toc #TableOfContents a {
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  .toc #TableOfContents a:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+  }
 </style>

@@ -11,6 +11,14 @@
       </p>
     {{ end }}
   {{ end }}
+  {{ if .Params.toc }}
+    <nav class="toc">
+      <details>
+        <summary>Table of Contents</summary>
+        {{ .TableOfContents }}
+      </details>
+    </nav>
+  {{ end }}
   <article>{{ .Content }}</article>
 
   {{ if eq .Type "blog" }}

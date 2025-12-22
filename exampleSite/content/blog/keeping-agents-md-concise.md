@@ -1,64 +1,112 @@
 +++
-title = "Keep AGENTS.md Concise"
-date = "2025-01-15"
-description = "Why your AI agent instructions should be short, focused, and actionable—not encyclopedic documentation."
-tags = [
-    "ai",
-    "documentation",
-]
+title = "Keep agents.md concise"
+date = "2025-01-20"
+description = "Best practices for writing effective AI agent instruction files"
+tags = ["ai", "best-practices", "documentation"]
+toc = true
 +++
 
-When working with AI coding agents, there's a temptation to document everything in your `AGENTS.md` (or `CLAUDE.md`)
-file. Every pattern, every convention, every edge case. Resist this urge.
+The `agents.md` or `AGENTS.md` file has become a common convention for providing context to AI coding assistants. However, there's a tendency to overload these files with information that reduces their effectiveness.
 
-## The Problem with Verbose Instructions
+## Why Conciseness Matters
 
-AI agents have context windows, but more importantly, they have attention spans. A 2000-line instruction file doesn't
-make your agent smarter—it makes it slower and more confused. The signal-to-noise ratio drops as you add more "just in
-case" guidance.
+AI assistants have context windows. Every token in your agents.md file consumes part of that budget. A bloated file means less room for actual code context and conversation history.
 
-## What Actually Belongs in AGENTS.md
+### The Token Economy
 
-Your agent instructions should focus on:
+Think of your context window as a budget. You want to spend tokens on:
 
-- **Non-obvious conventions** - Things the agent can't infer from code
-- **Project-specific patterns** - Your unique architecture decisions
-- **Common pitfalls** - Mistakes you've seen repeatedly
-- **Quick reference** - Commands, paths, key files
+- Relevant code snippets
+- Current conversation
+- Essential project context
 
-## What Doesn't Belong
+Not on verbose documentation that could be discovered through the codebase itself.
 
-Skip the basics. Your agent already knows:
+### Cognitive Load
 
-- How JavaScript/TypeScript works
-- Common framework patterns (React, Astro, etc.)
-- General best practices
-- Standard library documentation
+Even for AI, more information isn't always better. A focused, well-structured file helps the assistant quickly understand what matters most.
 
-## The 80/20 Rule
+## What to Include
 
-Focus on the 20% of information that solves 80% of common mistakes. Everything else can live in your actual
-documentation, README files, or be discovered through code exploration.
+Keep your agents.md focused on information that isn't easily discoverable:
 
-## A Good Example
+### Project-Specific Conventions
+
+Document conventions that differ from common patterns:
+
+- Unusual directory structures
+- Custom naming conventions
+- Non-standard build commands
+
+### Critical Constraints
+
+Highlight constraints that could cause issues:
+
+- Security requirements
+- Performance budgets
+- Compatibility requirements
+
+### Quick References
+
+Include frequently needed commands:
+
+```bash
+# Run tests
+npm test
+
+# Build for production
+npm run build
+
+# Start dev server
+npm run dev
+```
+
+## What to Avoid
+
+Some content actively hurts more than it helps:
+
+### Redundant Information
+
+Don't document what's obvious from the code:
+
+- Standard framework patterns
+- Common library usage
+- Self-documenting code structures
+
+### Lengthy Explanations
+
+Avoid walls of text explaining architecture. Instead, point to where the code lives and let the assistant read it directly.
+
+### Stale Documentation
+
+Outdated information is worse than no information. If you can't keep it updated, don't include it.
+
+## A Template
+
+Here's a minimal effective structure:
 
 ```markdown
-# AGENTS.md
+# Project Name
+
+Brief one-line description.
+
+## Quick Start
+
+Essential commands to get running.
 
 ## Key Conventions
 
-- Content dates must be quoted strings: "2024-01-15"
-- Draft posts require `draft: true` flag
-- Never import content utils in astro.config.ts
+- Convention 1
+- Convention 2
 
-## Common Commands
+## Important Constraints
 
-pnpm dev # localhost:4321
-pnpm build # Production build
+- Constraint 1
+- Constraint 2
 ```
 
-Clear, actionable, memorable. That's what makes agents effective.
+## Conclusion
 
----
+The best agents.md file is one that provides maximum value with minimum tokens. Focus on what's unique, essential, and not discoverable through normal code exploration.
 
-Remember: Your `AGENTS.md` is a reference card, not a manual. Keep it lean.
+Remember: the AI can read your code. Your job is to provide the context that code alone cannot convey.

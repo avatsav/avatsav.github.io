@@ -1,7 +1,11 @@
 {{ define "main" }}
+  {{ $isPublished := eq (.Params.isPublished | default true) true }}
+  {{ if and (not $isPublished) (not hugo.IsDevelopment) }}
+    {{/* Hide unpublished content in production */}}
+  {{ else }}
   {{ if eq .Type "blog" }}
     {{ if not .Params.menu }}
-      <h1>{{ .Title }}</h1>
+      <h1>{{ if and (not $isPublished) hugo.IsDevelopment }}[DRAFT] {{ end }}{{ .Title }}</h1>
       <p>
         <i>
           <time datetime="{{ .Date.Format "2006-01-02" }}">
@@ -37,4 +41,5 @@
       &nbsp;
     {{ end }}
   </div>
+  {{ end }}
 {{ end }}

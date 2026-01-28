@@ -1,6 +1,7 @@
 +++
 title = "Keep agents.md concise"
 date = "2025-01-20"
+slug = "keep-agents-concise"
 description = "Best practices for writing effective AI agent instruction files"
 tags = ["ai", "best-practices", "documentation"]
 toc = true

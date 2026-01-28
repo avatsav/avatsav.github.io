@@ -8,22 +8,33 @@
     {{ else }}
       <h1>{{ .Title }}</h1>
     {{ end }}
-    <ul class="blog-posts">
-      {{ range .Pages }}
-        <li>
-          <span>
-            <i>
-              <time datetime="{{ .Date.Format "2006-01-02" }}">
-                {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
-              </time>
-            </i>
-          </span>
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </li>
-      {{ else }}
-        <li>No posts yet</li>
+    {{ $pages := .Pages }}
+    {{ if gt (len $pages) 0 }}
+      {{ range $pages.GroupByDate "2006" }}
+        <h3>{{ .Key }}</h3>
+        <ul class="blog-posts">
+          {{ range .Pages }}
+            {{ $isPublished := eq (.Params.isPublished | default true) true }}
+            {{ if or $isPublished hugo.IsDevelopment }}
+            <li>
+              <span>
+                <i>
+                  <time datetime="{{ .Date.Format "2006-01-02" }}">
+                    {{ .Date.Format "Jan 02" }}
+                  </time>
+                </i>
+              </span>
+              <a href="{{ .Permalink }}">{{ if and (not $isPublished) hugo.IsDevelopment }}[DRAFT] {{ end }}{{ .Title }}</a>
+            </li>
+            {{ end }}
+          {{ end }}
+        </ul>
       {{ end }}
-    </ul>
+    {{ else }}
+      <ul class="blog-posts">
+        <li>No posts yet</li>
+      </ul>
+    {{ end }}
     {{ if not .Data.Singular }}
       <div class="tags-list">
         {{ range .Site.Taxonomies.tags }}

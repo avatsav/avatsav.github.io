@@ -1,6 +1,7 @@
 +++
 title = "init: Hello World"
 date = "2025-01-15"
+slug = "hello-world"
 description = "Hi, hey, hello there!"
 +++
 

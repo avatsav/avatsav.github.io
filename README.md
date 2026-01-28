@@ -1,4 +1,4 @@
-# Hugo ʕ•ᴥ•ʔ Bear Blog [![CI](https://github.com/janraasch/hugo-bearblog/actions/workflows/ci.yml/badge.svg)](https://github.com/janraasch/hugo-bearblog/actions/workflows/ci.yml)
+# Hugo ʕ•ᴥ•ʔ Bear Blog 
 
 🧸 A [Hugo](https://gohugo.io/)-theme based on [Bear Blog](https://bearblog.dev).
 
@@ -7,14 +7,6 @@
 ## Demo
 
 For a current & working demo of this theme, please check out https://janraasch.github.io/hugo-bearblog/ 🎯.
-
-## Screenshots
-
-⬜️ [Light][light-screenshot]
-
-⬛️ [Dark][dark-screenshot]
-
-When the user's browser is running »dark mode«, the dark color scheme will be used automatically. The default is the light/white color scheme. Check out the [`style.html`](https://github.com/janraasch/hugo-bearblog/blob/master/layouts/partials/style.html)-file for the implementation.
 
 ## Installation
 
@@ -62,15 +54,15 @@ hugo new blog/my-new-post.md
 
 ### Adding your branding / colors / css
 
-Add a `custom_head.html`-file to your `layouts/partials`-directory. In there you may add a `<style>`-tag, *or* you may add a `<link>`-tag referencing your own `custom.css` (in case you prefer to have a separate `.css`-file). Check out the [`style.html`](https://github.com/janraasch/hugo-bearblog/blob/master/layouts/partials/style.html)-file to find out which CSS-styles are applied by default.
+Add a `custom_head.html`-file to your `layouts/partials`-directory. In there you may add a `<style>`-tag, _or_ you may add a `<link>`-tag referencing your own `custom.css` (in case you prefer to have a separate `.css`-file). Check out the [`style.html`](https://github.com/janraasch/hugo-bearblog/blob/master/layouts/partials/style.html)-file to find out which CSS-styles are applied by default.
 
 ## Remixes 🎭
 
 The community has created some interesting variations of Hugo ʕ•ᴥ•ʔ Bear Blog. While the main theme stays true to the minimal Bear Blog philosophy, these remixes experiment with additional features:
 
-* [Hugo ʕ•ᴥ•ʔ Bear Blog ✨ Neo](https://github.com/rokcso/hugo-bearblog-neo/) - Features Chinese documentation and an innovative "Toast" upvote system.
+- [Hugo ʕ•ᴥ•ʔ Bear Blog ✨ Neo](https://github.com/rokcso/hugo-bearblog-neo/) - Features Chinese documentation and an innovative "Toast" upvote system.
 
-* [ᕦʕ •ᴥ•ʔᕤ Bear Cub](https://github.com/clente/hugo-bearcub) - A multilingual variant with experimental features like automatic social card generation.
+- [ᕦʕ •ᴥ•ʔᕤ Bear Cub](https://github.com/clente/hugo-bearcub) - A multilingual variant with experimental features like automatic social card generation.
 
 _Note: These are independent forks maintained by their respective creators._
 
@@ -85,10 +77,11 @@ Interested in contributing to Hugo ʕ•ᴥ•ʔ Bear Blog? Thanks for your inte
 We aim to keep this theme as simple and fast as the original [Bear Blog](https://bearblog.dev), while making it a friendly space for everyone to contribute and share their experiences.
 
 ## Development
-Run the `exampleSite` locally via
+
+Run the website locally via
 
 ```bash
-hugo server --source ./exampleSite --themesDir ../..
+hugo server --source ./avatsav --themesDir ../..
 ```
 
 In case you want to test functionalities and use hugo commands, in the root directory, you'll have to append `--source ./exampleSite --themesDir ../..` to them.
@@ -96,22 +89,15 @@ In case you want to test functionalities and use hugo commands, in the root dire
 For example:
 
 ```bash
-hugo new blog/post.md --source ./exampleSite --themesDir ../..
+hugo new blog/post.md --source ./avatsav --themesDir ../..
 ```
 
 Same thing for pages:
 
 ```bash
-hugo new page.md  --source ./exampleSite --themesDir ../..
+hugo new page.md  --source ./avatsav --themesDir ../..
 ```
 
-## Special Thanks 🎁
+## Theme
 
-A special thank you goes out to [Herman](https://herman.bearblog.dev), for creating the original [ʕ•ᴥ•ʔ Bear Blog](https://bearblog.dev/).
-
-## License
-[MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Jan Raasch](https://www.janraasch.com)
-
-[hugo-setup-guide]: https://gohugo.io/getting-started/installing
-[light-screenshot]: https://raw.githubusercontent.com/janraasch/hugo-bearblog/master/images/screenshot.png
-[dark-screenshot]: https://raw.githubusercontent.com/janraasch/hugo-bearblog/master/images/screenshot-dark.png
+Based on

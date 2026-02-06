@@ -1,5 +1,5 @@
 +++
-title = "Goodbye Jetpack ViewModel? Hello retain!"
+title = "Goodbye ViewModel. Hello retain!"
 date = "2026-02-06"
 slug = "hello-retain"
 description = "Retain is here!"
@@ -42,7 +42,7 @@ interface AuthScreenProviders {
 }
 ```
 
-This should look familiar. What stands out is the special treatment required to create a ViewModel instance. Most DI frameworks nowadays ship a separate ViewModel artifact to allow a ViewModel to be injectable. The `@HiltViewModel` annotation writes a bunch of binding code, and `hiltViewModel()` does a lot of heavy lifting to create the ViewModel instance.
+This should look familiar. What stands out is the special treatment required to create a ViewModel instance. Most DI frameworks nowadays ship a separate ViewModel artifact to allow a ViewModel to be injectable. The `@HiltViewModel` annotation writes a bunch of binding code, and `hiltViewModel()` does a lot of heavy lifting and abstracts away the creation logic with the ViewModelProvider. 
 
 ## A Simpler Approach
 
@@ -101,8 +101,8 @@ And now you can use it like this:
 
 ```kotlin {hl_lines=[3]}
 fun provideRoute(presenter: Provider<AuthPresenter>): RouteEntryProviderScope = {
-  entry<Route.Auth> { 
-    AuthScreen(presenter = retainPresenter { presenter() }) 
+  entry<Route.Auth> {
+    AuthScreen(presenter = retainPresenter { presenter() })
   }
 }
 ```
@@ -117,4 +117,4 @@ This decorator provides a `RetainedValuesStore` to each backstack entry, allowin
 
 The `retain` API shifts configuration survival from a framework concern (ViewModel) to a UI concern. Your state management classes become simpler: no need to extend ViewModel, no special DI setup, no framework coupling. Just regular Kotlin classes that your UI layer chooses to retain.
 
-ViewModel still has its place for complex lifecycle scenarios, but for most cases, `retain` with plain classes gets you the same benefits with less ceremony.
+ViewModel still has its place, but for most cases, `retain` with plain classes gets you the same benefits with less ceremony.

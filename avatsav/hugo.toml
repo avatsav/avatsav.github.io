@@ -60,8 +60,11 @@ ignoreErrors = ["error-disable-taxonomy"]
 [markup]
   [markup.highlight]
     style = 'rose-pine-moon' # https://xyproto.github.io/splash/docs/all.html
-    lineNos = false
+    noClasses = false
+    lineNos = true
     lineNumbersInTable = false
     codeFences = true
   [markup.goldmark.renderer]
       unsafe = true
+  [markup.goldmark.parser.attribute]
+      block = true

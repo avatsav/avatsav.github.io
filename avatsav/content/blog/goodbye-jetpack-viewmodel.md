@@ -19,7 +19,7 @@ This got me thinking: what if we removed the Android lifecycle handling from Vie
 
 Let's take the example of a simple ViewModel + Screen setup in Compose with Nav3 + Hilt:
 
-```kotlin
+```kotlin {hl_lines=[1,18]}
 @HiltViewModel
 @Inject
 class AuthViewModel(...): ViewModel() {
@@ -48,7 +48,7 @@ This should look familiar. What stands out is the special treatment required to 
 
 What if we could treat the ViewModel like every other Kotlin class without any special treatment? Turns out it is much simpler:
 
-```kotlin
+```kotlin {hl_lines=["11-13"]}
 @Inject
 class AuthPresenter(...) {
   val state: StateFlow<UiState>
@@ -59,13 +59,13 @@ class AuthPresenter(...) {
 interface AuthScreenProviders {
   @IntoSet
   @Provides
-  fun provideAuthEntryProviderScope(presenter: Provider<AuthPresenter>): RouteEntryProviderScope = {
+  fun provideRoute(presenter: Provider<AuthPresenter>): RouteEntryProviderScope = {
     entry<Route.Auth> { AuthScreen(presenter = retain { presenter() }) }
   }
 }
 ```
 
-No more special treatment. With `retain`, configuration survival becomes a UI concern rather than a framework requirement.
+You can inject the presenter as you would any other dependency. No more special treatment. With `retain`, configuration survival becomes a UI concern.
 
 ## Handling Cleanup
 
@@ -73,7 +73,7 @@ You might ask: how do you clean up resources like coroutine scopes when the reta
 
 Here's an example:
 
-```kotlin
+```kotlin {hl_lines=["18-20"]}
 interface Presenter {
   fun close()
 }
@@ -87,26 +87,24 @@ inline fun <reified P : Presenter> retainPresenter(
 }
 
 class RetainedPresenterObserver<P : Presenter>(val value: P) : RetainObserver {
-  override fun onRetained() {}
-
-  override fun onEnteredComposition() {}
-
-  override fun onExitedComposition() {}
-
+  override fun onRetained() = Unit
+  override fun onEnteredComposition() = Unit
+  override fun onExitedComposition() = Unit
+  override fun onUnused() = Unit
   override fun onRetired() {
     value.close()
   }
-
-  override fun onUnused() {}
 }
 ```
 
 And now you can use it like this:
 
-```kotlin
-  fun provideAuthEntryProviderScope(presenter: Provider<AuthPresenter>): RouteEntryProviderScope = {
-    entry<Route.Auth> { AuthScreen(presenter = retainPresenter { presenter() }) }
+```kotlin {hl_lines=[3]}
+fun provideRoute(presenter: Provider<AuthPresenter>): RouteEntryProviderScope = {
+  entry<Route.Auth> { 
+    AuthScreen(presenter = retainPresenter { presenter() }) 
   }
+}
 ```
 
 ## Navigation 3 Support

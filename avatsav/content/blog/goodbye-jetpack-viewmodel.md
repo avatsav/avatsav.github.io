@@ -1,24 +1,27 @@
 +++
 title = "Goodbye Jetpack ViewModel? Hello retain!"
-date = "2026-01-20"
+date = "2026-02-06"
 slug = "hello-retain"
 description = "Retain is here!"
 +++
 
-Compose 1.10 introduced the new `retain {}` API that has a different lifecycle to the `remember` and `rememberSaveable`. I recommend reading the excellent series of blog posts on it from GDE Jaewoong Eum.
+Compose `1.10` introduced the new `retain` API that has a different lifecycle than `remember` and `rememberSaveable`. I recommend reading the excellent series of blog posts on it from GDE Jaewoong Eum:
 
 - [Previewing retain{} API: A New Way to Persist State in Jetpack Compose](https://proandroiddev.com/exploring-retain-api-a-new-way-to-persist-state-in-jetpack-compose-bfb2fe2eae43)
 - [Previewing RetainedEffect: A New Side Effect to Bridge Between Composition and Retention Lifecycles](https://skydoves.medium.com/previewing-retainedeffect-a-new-side-effect-to-bridge-between-composition-and-retention-lifecycles-685b9e543de7)
 - [Understanding retain{} internals: A Scope-based State Preservation in Jetpack Compose](https://proandroiddev.com/understanding-retain-internals-a-new-way-to-preserve-state-in-jetpack-compose-54471a32fd05)
 
-A retained valued can survive a configuration change without being serialized. This is exactly what the Jetpack ViewModel(from here on referred to as ViewModel) does!
+A retained value can survive a configuration change without being serialized. This is exactly what Jetpack ViewModel does!
 
-So that got me thinking if we could take the android lifecycle handling out of the ViewModels and make them simple Kotlin class that does state management independent(from here on referred to as a Presenter). Turns out it is very much possible and simplifies a great many things!
+This got me thinking: what if we removed the Android lifecycle handling from ViewModels entirely? What if they were just plain Kotlin classes for state management? Turns out this is not only possible, it simplifies things considerably.
 
-Let's take the example of a simple ViewModel + Screen setup in Compose with Nav3 + Metro/Hilt
+## The ViewModel Problem
+
+Let's take the example of a simple ViewModel + Screen setup in Compose with Nav3 + Hilt:
 
 ```kotlin
 @HiltViewModel
+@Inject
 class AuthViewModel(...): ViewModel() {
   val state: StateFlow<UiState>
   fun login(creds: Credentials) { .. }
@@ -26,14 +29,10 @@ class AuthViewModel(...): ViewModel() {
 }
 
 @Composable
-fun AuthScreen(viewModel:AuthViewModel) {
+fun AuthScreen(viewModel: AuthViewModel) {
   ..
 }
 
-typealias RouteEntryProviderScope = EntryProviderScope<Route>.() -> Unit
-
-// Use this with NavDisplay!
-@ContributesTo(UiScope::class)
 interface AuthScreenProviders {
   @IntoSet
   @Provides
@@ -43,46 +42,51 @@ interface AuthScreenProviders {
 }
 ```
 
-This might be all too familiar to you. What stands out to me is the special treatment required to create an instance of a ViewModel which involves a lot of plumbing. Most DI frameworks nowadays ship a separate ViewModel artifact to allow a ViewModel to be injectable. The `@HiltViewModel` annotations write a bunch of binding code to make the ViewModle `hiltViewModel()` is doing a lot of heavylifting here to find the
+This should look familiar. What stands out is the special treatment required to create a ViewModel instance. Most DI frameworks nowadays ship a separate ViewModel artifact to allow a ViewModel to be injectable. The `@HiltViewModel` annotation writes a bunch of binding code, and `hiltViewModel()` does a lot of heavy lifting to create the ViewModel instance.
 
-What if we could treat the ViewModel in a way that every other Koltin class without any special treatment? Turns out it is much simpler
+## A Simpler Approach
+
+What if we could treat the ViewModel like every other Kotlin class without any special treatment? Turns out it is much simpler:
 
 ```kotlin
 @Inject
-class AuthPresenter(...): ViewModel() {
+class AuthPresenter(...) {
   val state: StateFlow<UiState>
   fun login(creds: Credentials) { .. }
   fun logout() { .. }
 }
 
-@Composable
-fun AuthScreen(presenter: AuthPresenter) {
-  ..
-}
-
-@ContributesTo(UiScope::class)
 interface AuthScreenProviders {
   @IntoSet
   @Provides
-  fun provideAuthEntryProviderScope(presenter: Providert<AuthPresenter>): RouteEntryProviderScope = {
+  fun provideAuthEntryProviderScope(presenter: Provider<AuthPresenter>): RouteEntryProviderScope = {
     entry<Route.Auth> { AuthScreen(presenter = retain { presenter() }) }
   }
 }
 ```
 
-No more special treatment. The retention of the presenter or any object on configuration change now becomes purely the choice of UI framework with the usage of `retain { }`.
-Now you might ask, how the coroutines or scopes are cancelled when the retained value is retired? Well, there's a `RetainObserver` interface that allows you to observe when an object is retained and retired. This allows you to do some housekeeping on your Presenters when they are retied. It would looks something like this.
+No more special treatment. With `retain`, configuration survival becomes a UI concern rather than a framework requirement.
+
+## Handling Cleanup
+
+You might ask: how do you clean up resources like coroutine scopes when the retained value is retired? The `RetainObserver` interface gives you lifecycle hooks for retained objects. You can use `onRetired()` to handle cleanup when the object is no longer needed.
+
+Here's an example:
 
 ```kotlin
+interface Presenter {
+  fun close()
+}
+
 /** Retains a presenter and closes it when retired */
 @Composable
-inline fun <reified P : MoleculePresenter<*, *, *>> retainPresenter(
+inline fun <reified P : Presenter> retainPresenter(
   noinline calculation: () -> P
 ): P {
   return retain { RetainedPresenterObserver(calculation()) }.value
 }
 
-class RetainedPresenterObserver<P : MoleculePresenter<*, *, *>>(val value: P) : RetainObserver {
+class RetainedPresenterObserver<P : Presenter>(val value: P) : RetainObserver {
   override fun onRetained() {}
 
   override fun onEnteredComposition() {}
@@ -97,10 +101,22 @@ class RetainedPresenterObserver<P : MoleculePresenter<*, *, *>>(val value: P) : 
 }
 ```
 
-And now you can use your newly created method like so
+And now you can use it like this:
 
 ```kotlin
   fun provideAuthEntryProviderScope(presenter: Provider<AuthPresenter>): RouteEntryProviderScope = {
     entry<Route.Auth> { AuthScreen(presenter = retainPresenter { presenter() }) }
   }
 ```
+
+## Navigation 3 Support
+
+Similar to how ViewModel requires `ViewModelStoreNavEntryDecorator`, using `retain` requires a `RetainedValuesStoreNavEntryDecorator` which is [currently under development](https://android-review.googlesource.com/c/platform/frameworks/support/+/3904490) as of this writing. It'll likely ship as a `runtime-retain-navigation3` artifact soon.
+
+This decorator provides a `RetainedValuesStore` to each backstack entry, allowing `retain` to respect navigation state. Retained values survive while the entry is in the backstack and get retired when the entry is removed.
+
+## Wrapping Up
+
+The `retain` API shifts configuration survival from a framework concern (ViewModel) to a UI concern. Your state management classes become simpler: no need to extend ViewModel, no special DI setup, no framework coupling. Just regular Kotlin classes that your UI layer chooses to retain.
+
+ViewModel still has its place for complex lifecycle scenarios, but for most cases, `retain` with plain classes gets you the same benefits with less ceremony.

@@ -42,11 +42,11 @@ interface AuthScreenProviders {
 }
 ```
 
-This should look familiar. What stands out is the special treatment required to create a ViewModel instance. Most DI frameworks nowadays ship a separate ViewModel artifact to allow a ViewModel to be injectable. The `@HiltViewModel` annotation writes a bunch of binding code, and `hiltViewModel()` does a lot of heavy lifting and abstracts away the creation logic with the ViewModelProvider. 
+This should look familiar. What stands out is the special treatment required to create a ViewModel instance. Most DI frameworks nowadays ship a separate ViewModel artifact to allow a ViewModel to be injectable. The `@HiltViewModel` annotation writes a bunch of binding code, and `hiltViewModel()` does a lot of heavy lifting and abstracts away the creation logic with the ViewModelProvider.
 
 ## A Simpler Approach
 
-What if we could treat the ViewModel like every other Kotlin class without any special treatment? Turns out it is much simpler:
+With `retain`, the configuration change survival becomes a UI concern and we can make our state holders plain Kotlin classes and injectable just like any other dependency. No more special treatment.
 
 ```kotlin {hl_lines=["11-13"]}
 @Inject
@@ -64,8 +64,6 @@ interface AuthScreenProviders {
   }
 }
 ```
-
-You can inject the presenter as you would any other dependency. No more special treatment. With `retain`, configuration survival becomes a UI concern.
 
 ## Handling Cleanup
 

@@ -1,48 +1,40 @@
-name: CI
+name: Deploy
 
 on:
   push:
-    branches:
-    - master
-  pull_request:
-    branches:
-    - master
+    branches: [master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v6
+      - uses: actions/checkout@v4
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v3.0.0
-      with:
-        hugo-version: latest
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: latest
 
-    - name: Build local ./exampleSite
-      run: hugo --minify --gc --destination ../public --source ./exampleSite --themesDir ../.. --baseURL https://janraasch.github.io/hugo-bearblog/
+      - run: hugo --minify --source ./avatsav
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v5
-      with:
-        name: build
-        path: ./public
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./avatsav/public
 
   deploy:
     needs: build
-    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/download-artifact@v6
-        with:
-          name: build
-          path: ./public
-      - uses: peaceiris/actions-gh-pages@v4.0.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+      - id: deploy
+        uses: actions/deploy-pages@v4

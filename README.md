@@ -36,7 +36,7 @@ For above-the-fold images (like hero images), add `priority="high"` to use `fetc
 {{< figure src="images/hero.webp" alt="Description" caption="Optional caption" priority="high" >}}
 ```
 
-Hugo automatically generates 480w, 720w, and 900w variants with proper `srcset`, `width`, `height`, and `loading="lazy"` attributes for optimal performance.
+Hugo automatically generates 480w, 720w, 900w, 1200w, and 1440w variants with proper `srcset`, `width`, `height`, and `loading="lazy"` attributes for optimal performance.
 
 ## Theme
 

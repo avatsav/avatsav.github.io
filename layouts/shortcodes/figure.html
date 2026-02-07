@@ -5,7 +5,6 @@
 
 {{- $img := resources.Get $src -}}
 {{- if $img -}}
-  {{- $img480 := $img.Resize "480x webp" -}}
   {{- $img720 := $img.Resize "720x webp" -}}
   {{- $img900 := $img.Resize "900x webp" -}}
   {{- $img1200 := $img.Resize "1200x webp" -}}
@@ -16,7 +15,6 @@
     <img
       src="{{ $img720.RelPermalink }}"
       srcset="
-        {{ $img480.RelPermalink }}  480w,
         {{ $img720.RelPermalink }}  720w,
         {{ $img900.RelPermalink }}  900w,
         {{ $img1200.RelPermalink }} 1200w,

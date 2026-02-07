@@ -1,0 +1,45 @@
+{{ define "main" }}
+  {{ $isPublished := eq (.Params.isPublished | default true) true }}
+  {{ if and (not $isPublished) (not hugo.IsDevelopment) }}
+    {{/* Hide unpublished content in production */}}
+  {{ else }}
+  {{ if eq .Type "blog" }}
+    {{ if not .Params.menu }}
+      <h1>{{ if and (not $isPublished) hugo.IsDevelopment }}[DRAFT] {{ end }}{{ .Title }}</h1>
+      <p>
+        <i>
+          <time datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+          </time>
+        </i>
+      </p>
+    {{ end }}
+  {{ end }}
+  {{ if .Params.toc }}
+    <nav class="toc">
+      <details>
+        <summary>Table of Contents</summary>
+        {{ .TableOfContents }}
+      </details>
+    </nav>
+  {{ end }}
+  <article>{{ .Content }}</article>
+
+  {{ if eq .Type "blog" }}
+    {{ if (.Param "enablePostNavigator") }}
+      {{- partial
+        "post_navigator.html" .
+      -}}
+    {{ end }}
+
+  {{ end }}
+
+
+  <div class="tags-list">
+    {{ range (.GetTerms "tags") }}
+      <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+      &nbsp;
+    {{ end }}
+  </div>
+  {{ end }}
+{{ end }}

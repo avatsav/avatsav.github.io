@@ -1,0 +1,678 @@
+<style>
+  /* ===== CSS Variables ===== */
+  :root {
+    /* Layout */
+    --width: 720px;
+    --space: 1.5rem;
+    --radius: 5px;
+
+    /* Typography */
+    --font-main: Inter, sans-serif;
+    --font-secondary: Inter, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --font-scale: 1em;
+    --font-small: 0.9rem;
+
+    /* Inter font features */
+    font-feature-settings:
+      "liga" 1,
+      "calt" 1,
+      "zero" 1;
+
+    /* Computed Colors */
+    --surface-color: color-mix(in srgb, var(--link-color) 15%, transparent);
+    --visited-color: color-mix(
+      in srgb,
+      var(--link-color) 50%,
+      var(--text-color)
+    );
+    --muted-text-color: color-mix(
+      in srgb,
+      var(--text-color) 60%,
+      var(--bg-color)
+    );
+    --border: color-mix(in srgb, var(--text-color) 21%, var(--bg-color));
+
+    /* Light theme */
+    --bg-color: #f5f3f7;
+    --text-color: #2e2834;
+    --link-color: #6b4fa3;
+  }
+
+  /* Dark theme */
+  [data-theme="dark"] {
+    --bg-color: #1a1620;
+    --text-color: #e4e1e8;
+    --link-color: #a68dd4;
+    --border: color-mix(in srgb, var(--bg-color) 82%, var(--text-color));
+  }
+
+  /* Use InterVariable for browsers that support font-variation-settings */
+  @supports (font-variation-settings: normal) {
+    :root {
+      --font-main: InterVariable, sans-serif;
+      --font-secondary: InterVariable, sans-serif;
+    }
+  }
+
+  /* ===== Base Styles ===== */
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-color);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-secondary), sans-serif;
+    font-size: var(--font-scale);
+    line-height: 1.6;
+    color: var(--text-color);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+  }
+
+  main {
+    line-height: 1.6;
+  }
+
+  /* ===== Typography ===== */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-main), sans-serif;
+    color: var(--text-color);
+    margin-block: 2rem 0.75rem;
+    line-height: 1.3;
+    font-weight: 600;
+    page-break-after: avoid;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin-block: var(--space);
+  }
+
+  h1 + p {
+    margin-block: 0 var(--space);
+  }
+
+  strong,
+  b {
+    color: var(--text-color);
+    font-weight: 600;
+  }
+
+  time {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: var(--font-small);
+    color: var(--muted-text-color);
+  }
+
+  /* ===== Links ===== */
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  /* ===== Lists ===== */
+  ul,
+  ol {
+    margin-block: var(--space);
+    padding-inline-start: 1.6rem;
+  }
+
+  li + li {
+    margin-block-start: 0.25rem;
+  }
+
+  li > ul,
+  li > ol {
+    margin-block: 0.25rem;
+    margin-inline: 0;
+  }
+
+  /* ===== Blockquotes ===== */
+  blockquote {
+    margin-block: calc(var(--space) * 1.25);
+    margin-inline: 0;
+    padding: 0.9rem 1.2rem;
+    background: var(--surface-color);
+    border-inline-start: 3px solid var(--link-color);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--text-color);
+  }
+
+  blockquote > *:first-child {
+    margin-block-start: 0;
+  }
+
+  blockquote > *:last-child {
+    margin-block-end: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-block-start: 0.6rem;
+    font-style: normal;
+    font-size: var(--font-small);
+    color: color-mix(in srgb, var(--muted-text-color) 70%, var(--text-color));
+  }
+
+  blockquote cite::before {
+    content: "— ";
+  }
+
+  /* ===== Code ===== */
+  code,
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  :not(pre) > code {
+    padding: 2px 4px;
+    border-radius: var(--radius);
+    background: var(--surface-color);
+  }
+
+  .highlight pre {
+    padding: 1rem 0;
+    border-radius: var(--radius);
+    display: block;
+    overflow-x: auto;
+  }
+
+  .highlight pre code {
+    display: inline-block;
+    min-width: 100%;
+  }
+
+  mark {
+    background: rgba(255, 150, 120, 0.4);
+    padding: 1px 3px;
+    transform: skewX(-3deg);
+    display: inline-block;
+  }
+
+  kbd {
+    font-family: var(--font-mono);
+    font-feature-settings: normal;
+    background: var(--surface-color);
+    padding: 2px 6px;
+    margin: 0 2px;
+    font-size: calc(var(--font-scale) * 0.95);
+    border: 1px solid var(--link-color);
+    border-radius: 4px;
+    display: inline-block;
+    transform: perspective(200px) rotateX(12deg);
+    box-shadow:
+      0 3px 0 var(--link-color),
+      0 4px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ===== Media ===== */
+  img {
+    max-width: 100%;
+    border-radius: var(--radius);
+  }
+
+  figure {
+    margin: var(--space) 0;
+  }
+
+  figure img {
+    display: block;
+  }
+
+  figcaption {
+    text-align: center;
+    font-size: var(--font-small);
+    color: var(--muted-text-color);
+    font-style: italic;
+  }
+
+  figcaption p {
+    margin: 1rem;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  hr {
+    margin-block: calc(var(--space) * 1.5);
+    margin-inline: 0;
+    border: none;
+    border-block-start: 1px solid var(--border);
+  }
+
+  /* ===== Interactive Elements ===== */
+  button {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  /* Theme toggle button styled as link */
+  #theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--link-color);
+    font-family: inherit;
+    font-size: inherit;
+    text-decoration: none;
+  }
+
+  #theme-toggle:hover {
+    text-decoration: underline;
+  }
+
+  /* ===== Layout Components ===== */
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+  }
+
+  .inline {
+    width: auto !important;
+  }
+
+  footer {
+    margin-block-start: 4rem;
+    text-align: center;
+    font-size: var(--font-small);
+    color: var(--muted-text-color);
+  }
+
+  footer p {
+    margin-block: 0.5rem;
+  }
+
+  /* ===== Blog Post List ===== */
+  ul.blog-posts {
+    list-style-type: none;
+    margin-block: var(--space);
+    margin-inline: 0;
+    padding: 0;
+    margin-block-end: 2rem;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+    align-items: baseline;
+    gap: 1.3rem;
+  }
+
+  ul.blog-posts li + li {
+    margin-block-start: 0.25rem;
+  }
+
+  ul.blog-posts li:last-child {
+    margin-block-end: 0;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 auto;
+  }
+
+  ul.blog-posts time {
+    flex-shrink: 0;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--visited-color);
+  }
+
+  /* ===== Tags List ===== */
+  .tags-list {
+    margin-block-start: 2rem;
+    font-size: var(--font-small);
+  }
+
+  /* ===== Table of Contents ===== */
+  .toc {
+    margin-block: var(--space);
+    padding: 1rem;
+    background: var(--surface-color);
+    border-radius: var(--radius);
+    font-size: var(--font-small);
+  }
+
+  .toc summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .toc summary:hover {
+    color: var(--link-color);
+  }
+
+  .toc #TableOfContents {
+    margin-block-start: 0.75rem;
+  }
+
+  .toc #TableOfContents ul {
+    margin-block: 0;
+    padding-inline-start: 1.2rem;
+    list-style: none;
+  }
+
+  .toc #TableOfContents > ul {
+    padding-inline-start: 0;
+  }
+
+  .toc #TableOfContents li {
+    margin-block: 0.25rem;
+  }
+
+  .toc #TableOfContents a {
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  .toc #TableOfContents a:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+  }
+
+  /* ===== Chroma Syntax Highlighting (rose-pine-moon) ===== */
+  .chroma {
+    color: #e0def4;
+    background-color: #232136;
+  }
+  .chroma .err {
+    color: #eb6f92;
+  }
+  .chroma .lnlinks {
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+  }
+  .chroma .lntd {
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  .chroma .lntable {
+    border-spacing: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  .chroma .line {
+    padding-inline: 1rem;
+  }
+
+  .chroma .line.hl {
+    background-color: rgba(210, 153, 34, 0.15);
+    border-left: 4px solid rgba(210, 153, 34, 0.8);
+    border-top: 1px solid rgba(210, 153, 34, 0.4);
+    border-bottom: 1px solid rgba(210, 153, 34, 0.4);
+    padding-left: calc(1rem - 4px);
+  }
+  .chroma .line.hl + .line.hl {
+    border-top: none;
+  }
+  .chroma .line.hl:has(+ .line.hl) {
+    border-bottom: none;
+  }
+  .chroma .lnt {
+    white-space: pre;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 1em;
+    padding: 0 0.4em 0 0.4em;
+    color: #7f7f7f;
+  }
+  .chroma .ln {
+    white-space: pre;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 1em;
+    padding: 0 0.4em 0 0.4em;
+    color: #7f7f7f;
+  }
+  .chroma .line {
+    display: flex;
+  }
+  .chroma .k {
+    color: #3e8fb0;
+  }
+  .chroma .kc {
+    color: #3e8fb0;
+  }
+  .chroma .kd {
+    color: #3e8fb0;
+  }
+  .chroma .kn {
+    color: #c4a7e7;
+  }
+  .chroma .kp {
+    color: #3e8fb0;
+  }
+  .chroma .kr {
+    color: #3e8fb0;
+  }
+  .chroma .kt {
+    color: #3e8fb0;
+  }
+  .chroma .n {
+    color: #ea9a97;
+  }
+  .chroma .na {
+    color: #ea9a97;
+  }
+  .chroma .nc {
+    color: #9ccfd8;
+  }
+  .chroma .no {
+    color: #f6c177;
+  }
+  .chroma .nd {
+    color: #908caa;
+  }
+  .chroma .ni {
+    color: #ea9a97;
+  }
+  .chroma .ne {
+    color: #3e8fb0;
+  }
+  .chroma .nl {
+    color: #ea9a97;
+  }
+  .chroma .nn {
+    color: #ea9a97;
+  }
+  .chroma .py {
+    color: #ea9a97;
+  }
+  .chroma .nt {
+    color: #ea9a97;
+  }
+  .chroma .nb {
+    color: #ea9a97;
+  }
+  .chroma .bp {
+    color: #ea9a97;
+  }
+  .chroma .nv {
+    color: #ea9a97;
+  }
+  .chroma .vc {
+    color: #ea9a97;
+  }
+  .chroma .vg {
+    color: #ea9a97;
+  }
+  .chroma .vi {
+    color: #ea9a97;
+  }
+  .chroma .vm {
+    color: #ea9a97;
+  }
+  .chroma .nf {
+    color: #ea9a97;
+  }
+  .chroma .fm {
+    color: #ea9a97;
+  }
+  .chroma .l {
+    color: #f6c177;
+  }
+  .chroma .ld {
+    color: #f6c177;
+  }
+  .chroma .s {
+    color: #f6c177;
+  }
+  .chroma .sa {
+    color: #f6c177;
+  }
+  .chroma .sb {
+    color: #f6c177;
+  }
+  .chroma .sc {
+    color: #f6c177;
+  }
+  .chroma .dl {
+    color: #f6c177;
+  }
+  .chroma .sd {
+    color: #f6c177;
+  }
+  .chroma .s2 {
+    color: #f6c177;
+  }
+  .chroma .se {
+    color: #3e8fb0;
+  }
+  .chroma .sh {
+    color: #f6c177;
+  }
+  .chroma .si {
+    color: #f6c177;
+  }
+  .chroma .sx {
+    color: #f6c177;
+  }
+  .chroma .sr {
+    color: #f6c177;
+  }
+  .chroma .s1 {
+    color: #f6c177;
+  }
+  .chroma .ss {
+    color: #f6c177;
+  }
+  .chroma .m {
+    color: #f6c177;
+  }
+  .chroma .mb {
+    color: #f6c177;
+  }
+  .chroma .mf {
+    color: #f6c177;
+  }
+  .chroma .mh {
+    color: #f6c177;
+  }
+  .chroma .mi {
+    color: #f6c177;
+  }
+  .chroma .il {
+    color: #f6c177;
+  }
+  .chroma .mo {
+    color: #f6c177;
+  }
+  .chroma .o {
+    color: #908caa;
+  }
+  .chroma .ow {
+    color: #908caa;
+  }
+  .chroma .p {
+    color: #908caa;
+  }
+  .chroma .c {
+    color: #6e6a86;
+  }
+  .chroma .ch {
+    color: #6e6a86;
+  }
+  .chroma .cm {
+    color: #6e6a86;
+  }
+  .chroma .c1 {
+    color: #6e6a86;
+  }
+  .chroma .cs {
+    color: #6e6a86;
+  }
+  .chroma .cp {
+    color: #6e6a86;
+  }
+  .chroma .cpf {
+    color: #6e6a86;
+  }
+  .chroma .gd {
+    color: #eb6f92;
+  }
+  .chroma .ge {
+    font-style: italic;
+  }
+  .chroma .gi {
+    color: #9ccfd8;
+  }
+  .chroma .gs {
+    font-weight: bold;
+  }
+  .chroma .gu {
+    color: #c4a7e7;
+  }
+</style>

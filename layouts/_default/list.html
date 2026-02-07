@@ -1,0 +1,68 @@
+{{ define "main" }}
+  <section>
+    {{ if .Data.Singular }}
+      <h3 style="margin-bottom:0">Filtering for "{{ .Title }}"</h3>
+      <small>
+        <a href="{{ "blog" | relURL }}">Remove filter</a>
+      </small>
+    {{ else }}
+      <h1>{{ .Title }}</h1>
+    {{ end }}
+    {{ $pages := .Pages }}
+    {{ if gt (len $pages) 0 }}
+      {{ range $pages.GroupByDate "2006" }}
+        {{ $visiblePages := slice }}
+        {{ range .Pages }}
+          {{ $isPublished := eq (.Params.isPublished | default true) true }}
+          {{ if or $isPublished hugo.IsDevelopment }}
+            {{ $visiblePages = $visiblePages | append . }}
+          {{ end }}
+        {{ end }}
+        {{ if $visiblePages }}
+        <h3>{{ .Key }}</h3>
+        <ul class="blog-posts">
+          {{ range $visiblePages }}
+            {{ $isPublished := eq (.Params.isPublished | default true) true }}
+            <li>
+              <span>
+                <i>
+                  <time datetime="{{ .Date.Format "2006-01-02" }}">
+                    {{ .Date.Format "Jan 02" }}
+                  </time>
+                </i>
+              </span>
+              <a href="{{ .Permalink }}">{{ if and (not $isPublished) hugo.IsDevelopment }}[DRAFT] {{ end }}{{ .Title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      <ul class="blog-posts">
+        <li>No posts yet</li>
+      </ul>
+    {{ end }}
+    {{ if not .Data.Singular }}
+      {{ $publishedTags := slice }}
+      {{ range .Site.RegularPages }}
+        {{ if eq (.Params.isPublished | default true) true }}
+          {{ range .GetTerms "tags" }}
+            {{ if not (in $publishedTags .Title) }}
+              {{ $publishedTags = $publishedTags | append .Title }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      {{ if $publishedTags }}
+      <div class="tags-list">
+        {{ range .Site.Taxonomies.tags }}
+          {{ if in $publishedTags .Page.Title }}
+            <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a>
+            &nbsp;
+          {{ end }}
+        {{ end }}
+      </div>
+      {{ end }}
+    {{ end }}
+  </section>
+{{ end }}

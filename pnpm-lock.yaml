@@ -1,0 +1,81 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    devDependencies:
+      prettier:
+        specifier: ^3.4.2
+        version: 3.7.4
+      prettier-plugin-go-template:
+        specifier: ^0.0.15
+        version: 0.0.15(prettier@3.7.4)
+      prettier-plugin-hugo-post:
+        specifier: ^0.4.1
+        version: 0.4.1(prettier@3.7.4)
+
+packages:
+
+  '@taplo/core@0.2.0':
+    resolution: {integrity: sha512-r8bl54Zj1In3QLkiW/ex694bVzpPJ9EhwqT9xkcUVODnVUGirdB1JTsmiIv0o1uwqZiwhi8xNnTOQBRQCpizrQ==}
+
+  '@taplo/lib@0.5.0':
+    resolution: {integrity: sha512-+xIqpQXJco3T+VGaTTwmhxLa51qpkQxCjRwezjFZgr+l21ExlywJFcDfTrNmL6lG6tqb0h8GyJKO3UPGPtSCWg==}
+
+  prettier-plugin-go-template@0.0.15:
+    resolution: {integrity: sha512-WqU92E1NokWYNZ9mLE6ijoRg6LtIGdLMePt2C7UBDjXeDH9okcRI3zRqtnWR4s5AloiqyvZ66jNBAa9tmRY5EQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      prettier: ^3.0.0
+
+  prettier-plugin-hugo-post@0.4.1:
+    resolution: {integrity: sha512-w7BpRdNOjxj/xUlUzHRqnjGN0oxtE8k7MlE/v7+YG2EsLm5zjU7Q8munuf3S8knH6wT3NuYJaD3+GkY7WZUNCA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      prettier: '>=3.0.0'
+
+  prettier-plugin-toml@2.0.6:
+    resolution: {integrity: sha512-12N/wBuHa9jd/KVy9pRP20NMKxQfQLMseQCt66lIbLaPLItvGUcSIryE1eZZMJ7loSws6Ig3M2Elc2EreNh76w==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      prettier: ^3.0.3
+
+  prettier@3.7.4:
+    resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  ulid@2.4.0:
+    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
+    hasBin: true
+
+snapshots:
+
+  '@taplo/core@0.2.0': {}
+
+  '@taplo/lib@0.5.0':
+    dependencies:
+      '@taplo/core': 0.2.0
+
+  prettier-plugin-go-template@0.0.15(prettier@3.7.4):
+    dependencies:
+      prettier: 3.7.4
+      ulid: 2.4.0
+
+  prettier-plugin-hugo-post@0.4.1(prettier@3.7.4):
+    dependencies:
+      prettier: 3.7.4
+      prettier-plugin-toml: 2.0.6(prettier@3.7.4)
+
+  prettier-plugin-toml@2.0.6(prettier@3.7.4):
+    dependencies:
+      '@taplo/lib': 0.5.0
+      prettier: 3.7.4
+
+  prettier@3.7.4: {}
+
+  ulid@2.4.0: {}

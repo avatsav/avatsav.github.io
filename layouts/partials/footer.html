@@ -1,0 +1,38 @@
+<p>
+  <button id="theme-toggle" aria-label="Toggle theme"></button>
+  ·
+  <a href="https://github.com/avatsav/avatsav.github.io">Source</a>
+  ·
+  <a href="{{ "index.xml" | relURL }}">RSS feed</a>
+</p>
+{{ if not (.Param "hideMadeWithLine") }}
+  <p>© Abhi 2026</p>
+{{ end }}
+
+
+<script>
+  (function () {
+    const themeToggle = document.getElementById("theme-toggle");
+    const html = document.documentElement;
+
+    // Update button text based on current theme
+    function updateButtonText(theme) {
+      themeToggle.textContent = theme === "dark" ? "Light Theme" : "Dark Theme";
+    }
+
+    // Toggle theme
+    function toggleTheme() {
+      const currentTheme = html.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      updateButtonText(newTheme);
+    }
+
+    // Initialize button text
+    updateButtonText(html.getAttribute("data-theme"));
+
+    // Add click handler
+    themeToggle.addEventListener("click", toggleTheme);
+  })();
+</script>

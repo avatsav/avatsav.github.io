@@ -46,7 +46,7 @@ interface AuthScreenProviders {
 }
 ```
 
-This should look familiar. What stands out is the special treatment required to create a ViewModel instance. Most DI frameworks nowadays ship a separate ViewModel artifact to allow a ViewModel to be injectable. The `@HiltViewModel` annotation writes a bunch of binding code, and `hiltViewModel()` does a lot of heavy lifting and abstracts away the creation logic with the `ViewModelProvider`.
+This should look familiar. What stands out is the special treatment required to create a ViewModel instance. Most DI frameworks nowadays ship a separate ViewModel artifact to allow a ViewModel to be injectable. The `@HiltViewModel` annotation writes a bunch of binding code, and `hiltViewModel()` does a lot of heavy lifting and abstracts away the creation logic with the `ViewModelProvider.Factory`.
 
 ## A Simpler Approach
 

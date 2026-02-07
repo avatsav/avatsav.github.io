@@ -1,5 +1,5 @@
 # Set to the URL for your site
-baseURL = "https://avatsav.github.io"
+baseURL = "https://avatsav.dev"
 
 # The name of this wonderful theme ;-).
 theme = 'hugo-bearblog'

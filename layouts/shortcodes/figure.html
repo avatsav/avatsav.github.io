@@ -1,6 +1,7 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" -}}
 {{- $caption := .Get "caption" | default (.Get "title") -}}
+{{- $priority := .Get "priority" -}}
 
 {{- $img := resources.Get $src -}}
 {{- if $img -}}
@@ -21,7 +22,11 @@
       width="{{ $img720.Width }}"
       height="{{ $img720.Height }}"
       alt="{{ $alt }}"
-      loading="lazy"
+      {{- if eq $priority "high" }}
+        fetchpriority="high"
+      {{- else }}
+        loading="lazy"
+      {{- end }}
     />
     {{- with $caption -}}
       <figcaption>{{ . | markdownify }}</figcaption>

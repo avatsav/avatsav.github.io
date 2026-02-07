@@ -1,0 +1,32 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" -}}
+{{- $caption := .Get "caption" | default (.Get "title") -}}
+
+{{- $img := resources.Get $src -}}
+{{- if $img -}}
+  {{- $img480 := $img.Resize "480x webp" -}}
+  {{- $img720 := $img.Resize "720x webp" -}}
+  {{- $img1200 := $img.Resize "1200x webp" -}}
+
+
+  <figure>
+    <img
+      src="{{ $img720.RelPermalink }}"
+      srcset="
+        {{ $img480.RelPermalink }}  480w,
+        {{ $img720.RelPermalink }}  720w,
+        {{ $img1200.RelPermalink }} 1200w
+      "
+      sizes="(max-width: 720px) 100vw, 720px"
+      width="{{ $img720.Width }}"
+      height="{{ $img720.Height }}"
+      alt="{{ $alt }}"
+      loading="lazy"
+    />
+    {{- with $caption -}}
+      <figcaption>{{ . | markdownify }}</figcaption>
+    {{- end -}}
+  </figure>
+{{- else -}}
+  {{- errorf "Image not found: %s" $src -}}
+{{- end -}}

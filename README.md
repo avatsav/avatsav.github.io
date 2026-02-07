@@ -20,6 +20,18 @@ hugo new blog/my-new-post.md --source ./avatsav
 hugo new my-new-page.md --source ./avatsav
 ```
 
+## Images
+
+Images are processed through Hugo's asset pipeline for responsive delivery. Place images in `avatsav/assets/images/` (not `static/`).
+
+Use the `figure` shortcode in content files:
+
+```markdown
+{{< figure src="images/my-image.webp" alt="Description" caption="Optional caption" >}}
+```
+
+Hugo automatically generates 480w, 720w, and 1200w variants with proper `srcset`, `width`, `height`, and `loading="lazy"` attributes for optimal performance.
+
 ## Theme
 
 Based on [Hugo Bear Blog](https://github.com/janraasch/hugo-bearblog) by [Jan Raasch](https://github.com/janraasch).

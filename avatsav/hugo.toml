@@ -31,8 +31,8 @@ ignoreErrors = ["error-disable-taxonomy"]
   # Site name for OpenGraph
   title = "Abhi's devlog"
 
-  # Default OG image for social sharing previews
-  ogImageDefault = "images/index.jpeg"
+  # Optional: Default OG image for social sharing previews
+  # ogImageDefault = "images/index.jpeg"
 
   # Optional: Twitter handle for Twitter Cards (without @)
   # twitter = "yourhandle"

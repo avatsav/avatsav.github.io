@@ -1,0 +1,64 @@
+{{- $title := .Title -}}
+{{- $description := .Description -}}
+{{- $siteName := .Site.Params.title | default .Site.Title -}}
+
+{{- if .IsHome -}}
+  {{- $title = .Site.Title -}}
+  {{- $description = .Site.Params.description -}}
+{{- else if not $description -}}
+  {{- if .IsPage -}}
+    {{- $description = .Summary | plainify | truncate 200 -}}
+  {{- else -}}
+    {{- $description = .Site.Params.description -}}
+  {{- end -}}
+{{- end -}}
+
+
+<!-- Open Graph / Facebook -->
+<meta
+  property="og:type"
+  content="{{ if .IsPage }}
+    article
+  {{ else }}
+    website
+  {{ end }}"
+/>
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:site_name" content="{{ $siteName }}" />
+<meta
+  property="og:locale"
+  content="{{ .Site.LanguageCode | default "en-US" }}"
+/>
+
+{{- if .IsPage -}}
+  {{- if .PublishDate -}}
+    <meta
+      property="article:published_time"
+      content="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}"
+    />
+  {{- end -}}
+  {{- if .Lastmod -}}
+    <meta
+      property="article:modified_time"
+      content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}"
+    />
+  {{- end -}}
+  {{- with .Params.tags -}}
+    {{- range first 6 . -}}
+      <meta property="article:tag" content="{{ . }}" />
+    {{- end -}}
+  {{- end -}}
+  {{- with .Site.Params.author -}}
+    <meta property="article:author" content="{{ . }}" />
+  {{- end -}}
+{{- end -}}
+
+{{- with .Params.image -}}
+  <meta property="og:image" content="{{ . | absURL }}" />
+{{- else -}}
+  {{- with .Site.Params.ogImageDefault -}}
+    <meta property="og:image" content="{{ . | absURL }}" />
+  {{- end -}}
+{{- end -}}

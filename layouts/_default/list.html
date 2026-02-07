@@ -19,22 +19,26 @@
           {{ end }}
         {{ end }}
         {{ if $visiblePages }}
-        <h3>{{ .Key }}</h3>
-        <ul class="blog-posts">
-          {{ range $visiblePages }}
-            {{ $isPublished := eq (.Params.isPublished | default true) true }}
-            <li>
-              <span>
-                <i>
-                  <time datetime="{{ .Date.Format "2006-01-02" }}">
-                    {{ .Date.Format "Jan 02" }}
-                  </time>
-                </i>
-              </span>
-              <a href="{{ .Permalink }}">{{ if and (not $isPublished) hugo.IsDevelopment }}[DRAFT] {{ end }}{{ .Title }}</a>
-            </li>
-          {{ end }}
-        </ul>
+          <h3>{{ .Key }}</h3>
+          <ul class="blog-posts">
+            {{ range $visiblePages }}
+              {{ $isPublished := eq (.Params.isPublished | default true) true }}
+              <li>
+                <span>
+                  <i>
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">
+                      {{ .Date.Format "Jan 02" }}
+                    </time>
+                  </i>
+                </span>
+                <a href="{{ .Permalink }}">
+                  {{ if and (not $isPublished) hugo.IsDevelopment }}
+                    [DRAFT]
+                  {{ end }}{{ .Title }}
+                </a>
+              </li>
+            {{ end }}
+          </ul>
         {{ end }}
       {{ end }}
     {{ else }}
@@ -54,14 +58,14 @@
         {{ end }}
       {{ end }}
       {{ if $publishedTags }}
-      <div class="tags-list">
-        {{ range .Site.Taxonomies.tags }}
-          {{ if in $publishedTags .Page.Title }}
-            <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a>
-            &nbsp;
+        <div class="tags-list">
+          {{ range .Site.Taxonomies.tags }}
+            {{ if in $publishedTags .Page.Title }}
+              <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a>
+              &nbsp;
+            {{ end }}
           {{ end }}
-        {{ end }}
-      </div>
+        </div>
       {{ end }}
     {{ end }}
   </section>

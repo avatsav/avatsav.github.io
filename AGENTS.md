@@ -25,12 +25,14 @@ npm run format:check                               # Check formatting
 ## Code Style
 
 ### Formatting
+
 - **Indentation**: 2 spaces (no tabs)
 - **Line endings**: LF
 - **Charset**: UTF-8
 - Always run `npm run format` after editing templates
 
 ### Go Templates (`layouts/**/*.html`)
+
 - Use `{{- ` and ` -}}` for whitespace control
 - Variables: `{{ $varName := value }}`
 - Conditionals: `{{ if }}`...`{{ end }}`
@@ -39,7 +41,9 @@ npm run format:check                               # Check formatting
 - Hugo functions: `relURL`, `absURL`
 
 ### Markdown Content
+
 TOML frontmatter with `+++` delimiters:
+
 ```toml
 +++
 title = "Post Title"
@@ -47,15 +51,18 @@ date = "2026-02-06"
 slug = "post-slug"
 description = "SEO description"
 tags = ["tag1", "tag2"]
+image = "images/post-og.png"  # Optional: custom OG image for this post
 +++
 ```
 
 ### Naming
+
 - Files/CSS: kebab-case (`my-post.md`, `tags-list`)
 - Partials: snake_case (`seo_tags.html`, `custom_head.html`)
 - Template vars: camelCase (`$isPublished`)
 
 ### Structure
+
 - Blog posts: `avatsav/content/blog/`
 - Pages: `avatsav/content/`
 - Images: `avatsav/static/images/`
@@ -65,4 +72,6 @@ tags = ["tag1", "tag2"]
 
 - Custom head/body: Use `custom_head.html` / `custom_body.html` partials
 - Inline styles: Edit `layouts/partials/style.html` for colors/dark mode
+- OpenGraph: Custom templates in `layouts/partials/opengraph.html` and `twitter_cards.html`
+- Per-post OG images: Add `image = "images/post-image.png"` to frontmatter (optional)
 - CI: Pushes to `main` auto-deploy to GitHub Pages via `.github/workflows/ci.yml`

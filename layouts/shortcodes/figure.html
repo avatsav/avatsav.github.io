@@ -6,18 +6,18 @@
 {{- if $img -}}
   {{- $img480 := $img.Resize "480x webp" -}}
   {{- $img720 := $img.Resize "720x webp" -}}
-  {{- $img1200 := $img.Resize "1200x webp" -}}
+  {{- $img900 := $img.Resize "900x webp" -}}
 
 
   <figure>
     <img
       src="{{ $img720.RelPermalink }}"
       srcset="
-        {{ $img480.RelPermalink }}  480w,
-        {{ $img720.RelPermalink }}  720w,
-        {{ $img1200.RelPermalink }} 1200w
+        {{ $img480.RelPermalink }} 480w,
+        {{ $img720.RelPermalink }} 720w,
+        {{ $img900.RelPermalink }} 900w
       "
-      sizes="(max-width: 720px) 100vw, 720px"
+      sizes="(max-width: 360px) 100vw, (max-width: 720px) 720px, 720px"
       width="{{ $img720.Width }}"
       height="{{ $img720.Height }}"
       alt="{{ $alt }}"

@@ -5,7 +5,7 @@ baseURL = "https://avatsav.github.io"
 theme = 'hugo-bearblog'
 
 # Basic metadata configuration for your blog.
-title = "Abhi right back 🚴"
+title = "Abhi right back"
 author = "Abhijith Srivatsav"
 copyright = "Copyright © 2026, Abhijith Srivatsav."
 languageCode = "en-GB"
@@ -22,17 +22,17 @@ ignoreErrors = ["error-disable-taxonomy"]
 
 [params]
   # The "description" of your website. This is used in the meta data of your generated html.
-  description = "Hugo + Bear = :heart:"
+  description = "Hi, hey, hello! 👋"
 
   # The path to your "favicon". This should be a square (at least 32px x 32px) png-file.
   # Hint: It's good practise to also put a "favicon.ico"-file into your "static"-folder.
   favicon = "images/favicon.svg"
 
   # Site name for OpenGraph
-  title = "Abhi's logbook"
+  title = "Abhi's devlog"
 
-  # Optional: Default OG image (if you want one). Comment out to use no default image.
-  # ogImageDefault = "images/og-default.png"
+  # Default OG image for social sharing previews
+  ogImageDefault = "images/index.jpeg"
 
   # Optional: Twitter handle for Twitter Cards (without @)
   # twitter = "yourhandle"

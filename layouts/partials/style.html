@@ -166,6 +166,16 @@
     --border: color-mix(in srgb, var(--bg-color) 82%, var(--text-color));
   }
 
+  /* Dark mode fallback when JS is disabled */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg-color: #1a1620;
+      --text-color: #e4e1e8;
+      --link-color: #a68dd4;
+      --border: color-mix(in srgb, var(--bg-color) 82%, var(--text-color));
+    }
+  }
+
   /* Use InterVariable for browsers that support font-variation-settings */
   @supports (font-variation-settings: normal) {
     :root {

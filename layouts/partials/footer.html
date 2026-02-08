@@ -1,6 +1,8 @@
 <p>
-  <button id="theme-toggle"></button>
-  ·
+  <span id="theme-toggle-wrapper" hidden>
+    <button id="theme-toggle"></button>
+    ·
+  </span>
   <a href="https://github.com/avatsav/avatsav.github.io">Source</a>
   ·
   <a href="{{ "index.xml" | relURL }}">RSS feed</a>
@@ -29,8 +31,9 @@
       updateButtonText(newTheme);
     }
 
-    // Initialize button text
+    // Initialize button text and show toggle
     updateButtonText(html.getAttribute("data-theme"));
+    document.getElementById("theme-toggle-wrapper").hidden = false;
 
     // Add click handler
     themeToggle.addEventListener("click", toggleTheme);

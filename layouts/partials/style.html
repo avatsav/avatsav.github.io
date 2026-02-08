@@ -1,3 +1,9 @@
+{{- $lightBg := "#f5f3f7" -}}
+{{- $lightText := "#2e2834" -}}
+{{- $lightLink := "#6b4fa3" -}}
+{{- $darkBg := "#1a1620" -}}
+{{- $darkText := "#e4e1e8" -}}
+{{- $darkLink := "#a68dd4" -}}
 <style>
   /* ===== Self-hosted Fonts ===== */
   @font-face {
@@ -147,31 +153,31 @@
     );
     --muted-text-color: color-mix(
       in srgb,
-      var(--text-color) 60%,
+      var(--text-color) 70%,
       var(--bg-color)
     );
     --border: color-mix(in srgb, var(--text-color) 21%, var(--bg-color));
 
     /* Light theme */
-    --bg-color: #f5f3f7;
-    --text-color: #2e2834;
-    --link-color: #6b4fa3;
+    --bg-color: {{ $lightBg }};
+    --text-color: {{ $lightText }};
+    --link-color: {{ $lightLink }};
   }
 
   /* Dark theme */
   [data-theme="dark"] {
-    --bg-color: #1a1620;
-    --text-color: #e4e1e8;
-    --link-color: #a68dd4;
+    --bg-color: {{ $darkBg }};
+    --text-color: {{ $darkText }};
+    --link-color: {{ $darkLink }};
     --border: color-mix(in srgb, var(--bg-color) 82%, var(--text-color));
   }
 
   /* Dark mode fallback when JS is disabled */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg-color: #1a1620;
-      --text-color: #e4e1e8;
-      --link-color: #a68dd4;
+      --bg-color: {{ $darkBg }};
+      --text-color: {{ $darkText }};
+      --link-color: {{ $darkLink }};
       --border: color-mix(in srgb, var(--bg-color) 82%, var(--text-color));
     }
   }

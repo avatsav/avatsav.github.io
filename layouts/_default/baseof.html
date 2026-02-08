@@ -21,6 +21,9 @@
       }}
     {{ end -}}
     {{- partial "style.html" . -}}
+    {{- if (.Page.Store.Get "hasCodeBlock") -}}
+      {{- partial "syntax.html" . -}}
+    {{- end -}}
 
 
     <!-- A partial to be overwritten by the user.

@@ -41,7 +41,7 @@
 
     <div class="tags-list">
       {{ range (.GetTerms "tags") }}
-        <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+        <a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
         &nbsp;
       {{ end }}
     </div>

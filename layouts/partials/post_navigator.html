@@ -3,7 +3,7 @@
 >
   <p>
     {{ if .PrevInSection }}
-      <a href="{{ .PrevInSection.Permalink }}"><< Previous Post</a>
+      <a href="{{ .PrevInSection.RelPermalink }}"><< Previous Post</a>
     {{ else }}
       <strike><< Previous Post</strike>
     {{ end }}
@@ -11,7 +11,7 @@
   <p>|</p>
   <p>
     {{ if .NextInSection }}
-      <a href="{{ .NextInSection.Permalink }}">Next Post >></a>
+      <a href="{{ .NextInSection.RelPermalink }}">Next Post >></a>
     {{ else }}
       <strike>Next Post >></strike>
     {{ end }}

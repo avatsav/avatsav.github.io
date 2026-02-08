@@ -31,7 +31,7 @@
                     </time>
                   </i>
                 </span>
-                <a href="{{ .Permalink }}">
+                <a href="{{ .RelPermalink }}">
                   {{ if and (not $isPublished) hugo.IsDevelopment }}
                     [DRAFT]
                   {{ end }}{{ .Title }}
@@ -61,7 +61,7 @@
         <div class="tags-list">
           {{ range .Site.Taxonomies.tags }}
             {{ if in $publishedTags .Page.Title }}
-              <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}</a>
+              <a href="{{ .Page.RelPermalink }}">#{{ .Page.Title }}</a>
               &nbsp;
             {{ end }}
           {{ end }}

@@ -29,7 +29,7 @@ ignoreErrors = ["error-disable-taxonomy"]
   favicon = "images/favicon.svg"
 
   # Site name for OpenGraph
-  title = "Abhi's devlog"
+  title = "Abhi right back"
 
   # Optional: Default OG image for social sharing previews
   # ogImageDefault = "images/index.jpeg"

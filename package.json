@@ -5,11 +5,18 @@
   "description": "🧸 A [Hugo](https://gohugo.io/)-theme based on [Bear Blog](https://bearblog.dev).",
   "main": "index.js",
   "devDependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@resvg/resvg-js": "^2.6.2",
+    "gray-matter": "^4.0.3",
     "prettier": "^3.4.2",
     "prettier-plugin-go-template": "^0.0.15",
-    "prettier-plugin-hugo-post": "^0.4.1"
+    "prettier-plugin-hugo-post": "^0.4.1",
+    "satori": "^0.19.2",
+    "sharp": "^0.34.5",
+    "toml": "^3.0.0"
   },
   "scripts": {
+    "generate:og": "node scripts/generate-og.mjs",
     "format": "prettier --write layouts/**/*.html",
     "format:check": "prettier --check layouts/**/*.html"
   },

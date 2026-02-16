@@ -27,8 +27,17 @@
   <meta name="twitter:image" content="{{ . | absURL }}" />
   <meta name="twitter:card" content="summary_large_image" />
 {{- else -}}
-  {{- with .Site.Params.ogImageDefault -}}
-    <meta name="twitter:image" content="{{ . | absURL }}" />
+  {{- if .IsPage -}}
+    {{- $slug := or .Slug .File.ContentBaseName -}}
+    <meta
+      name="twitter:image"
+      content="{{ printf "og/%s.png" $slug | absURL }}"
+    />
     <meta name="twitter:card" content="summary_large_image" />
+  {{- else -}}
+    {{- with .Site.Params.ogImageDefault -}}
+      <meta name="twitter:image" content="{{ . | absURL }}" />
+      <meta name="twitter:card" content="summary_large_image" />
+    {{- end -}}
   {{- end -}}
 {{- end -}}

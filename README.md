@@ -38,6 +38,18 @@ For above-the-fold images (like hero images), add `priority="high"` to use `fetc
 
 Hugo automatically generates 720w, 900w, 1200w, and 1440w variants with proper `srcset`, `width`, `height`, and `loading="lazy"` attributes for optimal performance.
 
+## OG Images
+
+Each blog post gets a unique gradient OG image derived from its slug. Images are committed to `avatsav/static/og/` and served as static files — no generation happens in CI.
+
+Generate images for new posts:
+
+```bash
+npm run generate:og
+```
+
+This skips posts that already have an image. To regenerate a specific post's image, delete its PNG from `avatsav/static/og/` and re-run.
+
 ## Theme
 
 Based on [Hugo Bear Blog](https://github.com/janraasch/hugo-bearblog) by [Jan Raasch](https://github.com/janraasch).

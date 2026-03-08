@@ -1,6 +1,8 @@
 {{- $lightBg := "#f5f3f7" -}}
 {{- $lightText := "#2e2834" -}}
-{{- $lightLink := "#6b4fa3" -}}
+{{- $lightLink :=
+  "#6b4fa3"
+-}}
 {{- $darkBg := "#1a1620" -}}
 {{- $darkText := "#e4e1e8" -}}
 {{- $darkLink := "#a68dd4" -}}
@@ -30,6 +32,14 @@
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
+  @font-face {
+    font-family: "PPWriter BookText";
+    font-style: normal;
+    font-weight: 340;
+    font-display: swap;
+    src: url("/fonts/PPWriter-BookText.woff2") format("woff2");
+  }
+
   /* ===== CSS Variables ===== */
   :root {
     /* Layout */
@@ -40,6 +50,7 @@
     /* Typography */
     --font-main: Inter, sans-serif;
     --font-secondary: Inter, sans-serif;
+    --font-prose: "PPWriter BookText", serif;
     --font-mono: "JetBrains Mono", monospace;
     --font-scale: 1em;
     --font-small: 0.9rem;
@@ -165,6 +176,11 @@
 
   h1 + p {
     margin-block: 0 var(--space);
+  }
+
+  .markdown-content :is(p, li, blockquote, figcaption, td, th, dd) {
+    font-family: var(--font-prose);
+    font-weight: 340;
   }
 
   strong,

@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ .Content }}
+  <article class="markdown-content">{{ .Content }}</article>
 
   {{ $blogPosts := first 10 (where (where .Site.RegularPages "Section" "blog") ".Params.isPublished" "ne" false) }}
   {{ if $blogPosts }}

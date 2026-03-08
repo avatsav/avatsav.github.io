@@ -27,7 +27,7 @@
         </details>
       </nav>
     {{ end }}
-    <article>{{ .Content }}</article>
+    <article class="markdown-content">{{ .Content }}</article>
 
     {{ if eq .Type "blog" }}
       {{ if (.Param "enablePostNavigator") }}

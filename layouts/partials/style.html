@@ -1,9 +1,6 @@
-{{- $lightBg := "#f5f3f7" -}} {{- $lightText := "#2e2834" -}}
-{{- $lightLink :=
-  "#6b4fa3"
--}}
-{{- $darkBg := "#1a1620" -}} {{- $darkText := "#e4e1e8" -}}
-{{- $darkLink := "#a68dd4" -}}
+{{- $lightBg := "#f5f3f7" -}} {{- $lightText := "#2e2834" -}} {{- $lightLink :=
+"#6b4fa3" -}} {{- $darkBg := "#1a1620" -}} {{- $darkText := "#e4e1e8" -}} {{-
+$darkLink := "#a68dd4" -}}
 <style>
   /* ===== Self-hosted Fonts ===== */
   @font-face {
@@ -38,6 +35,14 @@
     src: url("/fonts/PPWriter-BookText.woff2") format("woff2");
   }
 
+  @font-face {
+    font-family: "PPObject Sans";
+    font-style: normal;
+    font-weight: 570;
+    font-display: swap;
+    src: url("/fonts/PPObjectSans-Bold.woff2") format("woff2");
+  }
+
   /* ===== CSS Variables ===== */
   :root {
     /* Layout */
@@ -47,7 +52,7 @@
 
     /* Typography */
     --font-main: Inter, sans-serif;
-    --font-secondary: Inter, sans-serif;
+    --font-heading: "PPObject Sans", sans-serif;
     --font-prose: "PPWriter BookText", serif;
     --font-mono: "JetBrains Mono", monospace;
     --font-scale: 1.04em;
@@ -97,11 +102,10 @@
     }
   }
 
-  /* Use InterVariable for browsers that support font-variation-settings */
+  /* Use InterVariable for the primary sans stack when supported */
   @supports (font-variation-settings: normal) {
     :root {
       --font-main: InterVariable, sans-serif;
-      --font-secondary: InterVariable, sans-serif;
     }
   }
 
@@ -120,7 +124,7 @@
   }
 
   body {
-    font-family: var(--font-secondary), sans-serif;
+    font-family: var(--font-main), sans-serif;
     font-size: var(--font-scale);
     line-height: 1.6;
     color: var(--text-color);
@@ -144,11 +148,12 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-main), sans-serif;
+    font-family: var(--font-heading), sans-serif;
     color: var(--text-color);
     margin-block: 2rem 0.75rem;
+    letter-spacing: 0.015em;
     line-height: 1.3;
-    font-weight: 600;
+    font-weight: 570;
     page-break-after: avoid;
   }
 

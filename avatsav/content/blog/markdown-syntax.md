@@ -7,6 +7,7 @@ tags = [
     "syntax",
 ]
 isPublished = false
+toc = true
 +++
 
 For a quick cheatsheet, check out https://simplemde.com/markdown-guide.

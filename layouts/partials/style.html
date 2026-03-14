@@ -79,6 +79,7 @@ $darkLink := "#a68dd4" -}}
     --border: color-mix(in srgb, var(--text-color) 21%, var(--bg-color));
 
     /* Light theme */
+    color-scheme: light;
     --bg-color: {{ $lightBg }};
     --text-color: {{ $lightText }};
     --link-color: {{ $lightLink }};
@@ -86,6 +87,7 @@ $darkLink := "#a68dd4" -}}
 
   /* Dark theme */
   [data-theme="dark"] {
+    color-scheme: dark;
     --bg-color: {{ $darkBg }};
     --text-color: {{ $darkText }};
     --link-color: {{ $darkLink }};
@@ -95,6 +97,7 @@ $darkLink := "#a68dd4" -}}
   /* Dark mode fallback when JS is disabled */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
+      color-scheme: dark;
       --bg-color: {{ $darkBg }};
       --text-color: {{ $darkText }};
       --link-color: {{ $darkLink }};

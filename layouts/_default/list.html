@@ -24,18 +24,14 @@
             {{ range $visiblePages }}
               {{ $isPublished := eq (.Params.isPublished | default true) true }}
               <li>
-                <span>
-                  <i>
-                    <time datetime="{{ .Date.Format "2006-01-02" }}">
-                      {{ .Date.Format "Jan 02" }}
-                    </time>
-                  </i>
-                </span>
                 <a href="{{ .RelPermalink }}">
                   {{ if and (not $isPublished) hugo.IsDevelopment }}
                     [DRAFT]
                   {{ end }}{{ .Title }}
                 </a>
+                <time datetime="{{ .Date.Format "2006-01-02" }}">
+                  {{ .Date.Format "Jan 02" }}
+                </time>
               </li>
             {{ end }}
           </ul>

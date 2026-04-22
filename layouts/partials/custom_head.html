@@ -1,17 +1,6 @@
 <!-- A partial to be overwritten by the user.
   Simply place a custom_head.html into
   your local /layouts/partials-directory -->
-<script>
-  // Set theme immediately to prevent flash
-  (function () {
-    const theme =
-      localStorage.getItem("theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light");
-    document.documentElement.setAttribute("data-theme", theme);
-  })();
-</script>
 <link
   rel="preload"
   href="/fonts/InterVariable.woff2"

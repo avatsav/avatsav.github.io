@@ -1,4 +1,4 @@
-{{- $bg := "#0f1117" -}} {{- $text := "#c9cdd8" -}} {{- $link := "#7eb8a4" -}}
+{{- $bg := "#0f1117" -}} {{- $text := "#c9cdd8" -}} {{- $link := "#8c9dd4" -}}
 <style>
   /* ===== Self-hosted Fonts ===== */
   @font-face {
@@ -70,6 +70,7 @@
       var(--bg-color)
     );
     --border: color-mix(in oklch, var(--bg-color) 82%, var(--text-color));
+    --code-bg: color-mix(in oklch, var(--link-color) 12%, var(--bg-color));
   }
 
   /* Use InterVariable for the primary sans stack when supported */
@@ -261,7 +262,7 @@
   :not(pre) > code {
     padding: 2px 4px;
     border-radius: var(--radius);
-    background: #1e1e2e;
+    background: var(--code-bg);
   }
 
   .highlight pre {

@@ -2,7 +2,7 @@
   /* ===== Chroma Syntax Highlighting (catppuccin-mocha) ===== */
   /* Generated using: hugo gen chromastyles --style=catppuccin-mocha */
 
-  .chroma { color:#cdd6f4; background-color:#1e1e2e; -webkit-text-size-adjust:none; }
+  .chroma { color:#cdd6f4; background-color: var(--code-bg); -webkit-text-size-adjust:none; }
   .chroma .err { color:#f38ba8 }
   .chroma .lnlinks { outline:none; text-decoration:none; color:inherit }
   .chroma .lntd { vertical-align:top; padding:0; margin:0; border:0; }
@@ -11,12 +11,12 @@
   .chroma .ln { white-space:pre; -webkit-user-select:none; user-select:none; margin-right:1em; padding:0 0.4em; color:#7f849c }
   .chroma .line { display:flex; padding-inline: 1rem; }
 
-  /* Highlighted line (custom border style) */
+  /* Highlighted line (accent-tinted) */
   .chroma .line.hl {
-    background-color: rgba(210, 153, 34, 0.15);
-    border-left: 4px solid rgba(210, 153, 34, 0.8);
-    border-top: 1px solid rgba(210, 153, 34, 0.4);
-    border-bottom: 1px solid rgba(210, 153, 34, 0.4);
+    background-color: var(--surface-color);
+    border-left: 4px solid color-mix(in oklch, var(--link-color) 80%, transparent);
+    border-top: 1px solid color-mix(in oklch, var(--link-color) 40%, transparent);
+    border-bottom: 1px solid color-mix(in oklch, var(--link-color) 40%, transparent);
     padding-left: calc(1rem - 4px);
   }
   .chroma .line.hl + .line.hl { border-top: none; }

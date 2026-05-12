@@ -196,6 +196,13 @@
     margin-block: 0 var(--space);
   }
 
+  .markdown-content a[href^="http"]::after {
+    content: " ↗";
+    font-family: var(--font-mono);
+    display: inline-block;
+    transform: translateY(-0.2em);
+  }
+
   .markdown-content :is(p, li, blockquote, figcaption, td, th, dd) {
     font-family: var(--font-main);
     line-height: 1.7;

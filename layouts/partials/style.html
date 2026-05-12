@@ -201,6 +201,12 @@
     margin-block: 0 var(--space);
   }
 
+  .markdown-content a:hover {
+    background: var(--link-color);
+    color: var(--bg-color);
+    text-decoration: none;
+  }
+
   .markdown-content a[href^="http"]::after {
     content: " ↗";
     font-family: var(--font-mono);
@@ -245,6 +251,9 @@
     color: var(--link-color);
     cursor: pointer;
     text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
   }
 
   a:hover {

@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="{{ $siteName }}" />
 <meta
   property="og:locale"
-  content="{{ .Site.LanguageCode | default "en-US" }}"
+  content="{{ .Site.Language.Locale | default "en-US" }}"
 />
 
 {{- if .IsPage -}}

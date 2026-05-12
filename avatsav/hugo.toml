@@ -8,7 +8,7 @@ theme = 'hugo-bearblog'
 title = "Abhi right back"
 author = "Abhijith Srivatsav"
 copyright = "Copyright © 2026, Abhijith Srivatsav."
-languageCode = "en-GB"
+locale = "en-DE"
 
 # Generate a nice robots.txt for SEO
 enableRobotsTXT = true

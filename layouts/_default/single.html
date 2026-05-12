@@ -5,18 +5,16 @@
   {{ else }}
     {{ if eq .Type "blog" }}
       {{ if not .Params.menu }}
+        <p class="post-date">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+          </time>
+        </p>
         <h1>
           {{ if and (not $isPublished) hugo.IsDevelopment }}
             [DRAFT]
           {{ end }}{{ .Title }}
         </h1>
-        <p>
-          <i>
-            <time datetime="{{ .Date.Format "2006-01-02" }}">
-              {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
-            </time>
-          </i>
-        </p>
       {{ end }}
     {{ end }}
     {{ if .Params.toc }}

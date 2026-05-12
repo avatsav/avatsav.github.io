@@ -1,13 +1,27 @@
 <p>© Abhi 2026</p>
 <p>
   {{ with .Site.Params.version }}<span class="version">v{{ . }}</span>{{ end }}
-  {{ with .GitInfo }}
+  {{/*
+    Prefer the site-wide commit injected at build time (HUGO_COMMIT env var).
+    Fall back to .GitInfo so local `hugo server` still shows something.
+  */}}
+  {{ $commit := os.Getenv "HUGO_COMMIT" }}
+  {{ if $commit }}
     |
     <a
       class="commit-hash"
-      href="https://github.com/avatsav/avatsav.github.io/commit/{{ .Hash }}"
-      title="{{ .Subject }}"
-      >{{ .AbbreviatedHash }}</a
+      href="https://github.com/avatsav/avatsav.github.io/commit/{{ $commit }}"
+      >{{ substr $commit 0 7 }}</a
     >
+  {{ else }}
+    {{ with .GitInfo }}
+      |
+      <a
+        class="commit-hash"
+        href="https://github.com/avatsav/avatsav.github.io/commit/{{ .Hash }}"
+        title="{{ .Subject }}"
+        >{{ .AbbreviatedHash }}</a
+      >
+    {{ end }}
   {{ end }}
 </p>

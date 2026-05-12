@@ -18,12 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: latest
 
       - run: hugo --minify --source ./avatsav
+        env:
+          HUGO_COMMIT: ${{ github.sha }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

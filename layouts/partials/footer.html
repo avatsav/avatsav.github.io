@@ -2,7 +2,7 @@
 <p>
   {{ with .Site.Params.version }}<span class="version">v{{ . }}</span>{{ end }}
   {{ with .GitInfo }}
-    ·
+    |
     <a
       class="commit-hash"
       href="https://github.com/avatsav/avatsav.github.io/commit/{{ .Hash }}"

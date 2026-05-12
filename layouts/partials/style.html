@@ -118,8 +118,11 @@
     color: var(--text-color);
     margin: auto;
     padding-inline: 20px;
-    padding-block: 0 20px;
+    padding-block: 0;
     max-width: var(--width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     text-align: left;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -129,6 +132,7 @@
   main {
     line-height: 1.6;
     padding-block-start: 3rem;
+    flex: 1;
   }
 
   /* ===== Typography ===== */
@@ -479,15 +483,28 @@
 
   footer {
     margin-block-start: 4rem;
+    padding-block: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
+    position: relative;
     font-family: var(--font-mono);
     font-size: var(--font-label);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--muted-text-color);
+  }
+
+  footer::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 100vw;
+    height: 1px;
+    background: var(--border);
+    transform: translateX(-50%);
   }
 
   footer p {

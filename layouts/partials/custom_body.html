@@ -9,7 +9,7 @@
     toggle.addEventListener("click", () => {
       const open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.textContent = open ? "[CLOSE]" : "[MENU]";
+      toggle.textContent = open ? ">ESC" : ">NAV";
     });
   })();
 </script>

@@ -1,10 +1,11 @@
 {{ define "main" }}
   <section>
     {{ if .Data.Singular }}
-      <h2 style="margin-bottom:0">Filtering for "{{ .Title }}"</h2>
-      <small>
-        <a href="{{ "blog" | relURL }}">Remove filter</a>
-      </small>
+      <p class="eyebrow">
+        Filter: {{ .Title }}
+        · <a href="{{ "blog" | relURL }}">Remove</a>
+      </p>
+      <h1>Blog</h1>
     {{ else }}
       <h1>{{ .Title }}</h1>
     {{ end }}

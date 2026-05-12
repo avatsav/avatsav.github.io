@@ -1,9 +1,8 @@
 {
-  "name": "hugo-bearblog",
+  "name": "avatsav-blog",
   "private": true,
   "version": "1.0.0",
-  "description": "🧸 A [Hugo](https://gohugo.io/)-theme based on [Bear Blog](https://bearblog.dev).",
-  "main": "index.js",
+  "description": "Personal blog for avatsav.dev.",
   "devDependencies": {
     "@fontsource/inter": "^5.2.8",
     "@resvg/resvg-js": "^2.6.2",
@@ -22,16 +21,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/janraasch/hugo-bearblog.git"
+    "url": "git+https://github.com/avatsav/avatsav.github.io.git"
   },
-  "author": {
-    "name": "Jan Raasch",
-    "email": "jan@janraasch.com",
-    "url": "https://www.janraasch.com"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/janraasch/hugo-bearblog/issues"
-  },
-  "homepage": "https://github.com/janraasch/hugo-bearblog#readme"
+  "author": "Abhijith Srivatsav",
+  "license": "MIT"
 }

@@ -168,7 +168,7 @@
   }
 
   h1 {
-    font-size: clamp(1.8rem, 4vw, 2rem);
+    font-size: 1.8rem;
     text-transform: uppercase;
     line-height: 1.15;
   }
@@ -336,6 +336,12 @@
   ol {
     margin-block: var(--space);
     padding-inline-start: 1.6rem;
+  }
+
+  :is(ol, ul) li::marker {
+    font-family: var(--font-mono);
+    font-size: var(--font-label);
+    color: var(--muted-text-color);
   }
 
   li + li {

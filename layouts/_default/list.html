@@ -1,7 +1,7 @@
 {{ define "main" }}
   <section>
     {{ if .Data.Singular }}
-      <h3 style="margin-bottom:0">Filtering for "{{ .Title }}"</h3>
+      <h2 style="margin-bottom:0">Filtering for "{{ .Title }}"</h2>
       <small>
         <a href="{{ "blog" | relURL }}">Remove filter</a>
       </small>
@@ -30,7 +30,7 @@
                   {{ end }}{{ .Title }}
                 </a>
                 <time datetime="{{ .Date.Format "2006-01-02" }}">
-                  {{ .Date.Format "Jan 02" }}
+                  {{ .Date.Format "2006-01-02" }}
                 </time>
               </li>
             {{ end }}

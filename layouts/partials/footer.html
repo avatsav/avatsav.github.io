@@ -1,8 +1,13 @@
+<p>© Abhi 2026</p>
 <p>
-  <a href="https://github.com/avatsav/avatsav.github.io">Source</a>
-  ·
-  <a href="{{ "index.xml" | relURL }}">RSS</a>
+  {{ with .Site.Params.version }}<span class="version">v{{ . }}</span>{{ end }}
+  {{ with .GitInfo }}
+    ·
+    <a
+      class="commit-hash"
+      href="https://github.com/avatsav/avatsav.github.io/commit/{{ .Hash }}"
+      title="{{ .Subject }}"
+      >{{ .AbbreviatedHash }}</a
+    >
+  {{ end }}
 </p>
-{{ if not (.Param "hideMadeWithLine") }}
-  <p>© Abhi 2026</p>
-{{ end }}

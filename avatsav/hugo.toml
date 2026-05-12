@@ -13,6 +13,14 @@ languageCode = "en-GB"
 # Generate a nice robots.txt for SEO
 enableRobotsTXT = true
 
+# Expose per-page git commit info to templates (.GitInfo)
+enableGitInfo = true
+
+[[menu.main]]
+  name = "RSS"
+  url = "/index.xml"
+  weight = 20
+
 # Generate "Bearblog"-like URLs !only!, see https://bearblog.dev/.
 disableKinds = ["taxonomy"]
 ignoreErrors = ["error-disable-taxonomy"]
@@ -23,6 +31,9 @@ ignoreErrors = ["error-disable-taxonomy"]
 [params]
   # The "description" of your website. This is used in the meta data of your generated html.
   description = "Hi, hey, hello! 👋"
+
+  # Site version shown in the footer. Bump manually on noteworthy redesigns.
+  version = "1.1"
 
   # The path to your "favicon". This should be a square (at least 32px x 32px) png-file.
   # Hint: It's good practise to also put a "favicon.ico"-file into your "static"-folder.

@@ -4,18 +4,30 @@
   </div>
   <article class="markdown-content">{{ .Content }}</article>
 
-  {{ $blogPosts := first 10 (where (where .Site.RegularPages "Section" "blog") ".Params.isPublished" "ne" false) }}
-  {{ if $blogPosts }}
-    <h2>Recent Posts</h2>
-    <ul class="blog-posts">
-      {{ range $blogPosts }}
-        <li>
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          <time datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "Jan 2, 2006" }}
-          </time>
-        </li>
-      {{ end }}
-    </ul>
+  {{ $blogPosts := where (where .Site.RegularPages "Section" "blog") ".Params.isPublished" "ne" false }}
+  {{ with first 1 $blogPosts }}
+    <h2>Latest post</h2>
+    {{ range . }}
+      <a class="latest-post" href="{{ .RelPermalink }}">
+        <h3 class="latest-post-title">{{ .Title }}</h3>
+        <p class="latest-post-excerpt">
+          {{ with .Params.description }}
+            {{ . }}
+          {{ else }}
+            {{ .Summary | plainify }}
+          {{ end }}
+        </p>
+        <p class="latest-post-footer">
+          <span class="latest-post-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">
+              {{ .Date.Format "Jan 2, 2006" }}
+            </time>
+            <span class="sep">//</span>
+            <span>{{ .ReadingTime }} min read</span>
+          </span>
+          <span class="latest-post-cta">Read &rarr;</span>
+        </p>
+      </a>
+    {{ end }}
   {{ end }}
 {{ end }}

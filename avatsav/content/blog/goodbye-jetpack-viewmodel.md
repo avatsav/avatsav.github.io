@@ -2,7 +2,7 @@
 title = "Goodbye ViewModel. Hello retain!"
 date = "2026-02-07"
 slug = "hello-retain"
-description = "Retain is here!"
+description = "Compose's new retain API moves configuration-change survival from ViewModel to the UI layer, leaving presenters as plain injectable Kotlin classes."
 tags = [
     "android-dev",
     "compose",

@@ -182,9 +182,10 @@
     font-weight: 500;
   }
 
-  /* Generous breathing room between article sections */
-  .markdown-content h2 {
-    margin-block-start: 4rem;
+  /* Generous breathing room between article sections (and after markdown blocks) */
+  .markdown-content h2,
+  .markdown-content + h2 {
+    margin-block-start: 3.5rem;
   }
 
   .markdown-content h3 {
@@ -276,6 +277,11 @@
     text-transform: inherit;
     letter-spacing: inherit;
     font-size: inherit;
+  }
+
+  /* Dim inline separator (the "//" between metadata segments) */
+  .sep {
+    color: color-mix(in oklch, var(--text-color) 35%, var(--bg-color));
   }
 
   /* Filter chip shown under a page heading (e.g. tag filter on the blog list) */
@@ -662,6 +668,67 @@
   footer .version {
     text-transform: lowercase;
     letter-spacing: 0;
+  }
+
+  /* ===== Latest Post Card (home page) ===== */
+  .latest-post {
+    display: block;
+    margin-block: var(--space) 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .latest-post:hover {
+    border-color: var(--link-color);
+    text-decoration: none;
+  }
+
+  .latest-post-meta {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--font-label);
+    color: var(--muted-text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .latest-post-meta time {
+    font-size: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+  }
+
+  .latest-post-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 560;
+  }
+
+  .latest-post-excerpt {
+    margin: 0 0 1.5rem;
+    color: var(--muted-text-color);
+    font-size: var(--font-small);
+    line-height: 1.6;
+  }
+
+  .latest-post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted-text-color);
+  }
+
+  .latest-post-cta {
+    color: var(--text-color);
   }
 
   /* ===== Blog Post List ===== */

@@ -1,7 +1,7 @@
 <p>
   © Abhi 2026
   {{ with .Site.Params.version }}
-    |
+    <span class="sep">//</span>
     <span class="version">v{{ . }}</span>
   {{ end }}
   {{/* Prefer the site-wide commit injected at build time (HUGO_COMMIT env var).
@@ -9,7 +9,7 @@
   */}}
   {{ $commit := os.Getenv "HUGO_COMMIT" }}
   {{ if $commit }}
-    |
+    <span class="sep">//</span>
     <a
       class="commit-hash"
       href="https://github.com/avatsav/avatsav.github.io/commit/{{ $commit }}"
@@ -18,7 +18,7 @@
     </a>
   {{ else }}
     {{ with .GitInfo }}
-      |
+      <span class="sep">//</span>
       <a
         class="commit-hash"
         href="https://github.com/avatsav/avatsav.github.io/commit/{{ .Hash }}"

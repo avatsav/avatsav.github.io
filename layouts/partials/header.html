@@ -1,6 +1,6 @@
 <div class="dock">
   <a href="{{ "" | relURL }}" class="title">
-    <h2>{{ .Site.Title }}.</h2>
+    <h2><span class="prompt" aria-hidden="true">&gt;</span>{{ .Site.Title }}<span class="cursor" aria-hidden="true">▮</span></h2>
   </a>
   <nav id="site-nav">{{- partial "nav.html" . -}}</nav>
   <button

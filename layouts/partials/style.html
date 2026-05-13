@@ -381,7 +381,7 @@
     max-width: calc(100vw - 2rem);
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.75rem;
     padding: 0.375rem 1rem;
     border: 1px solid var(--border);
     /* Fixed radius. Browser clamps it to half-height when closed, so the
@@ -407,7 +407,7 @@
   .dock nav {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     font-size: 0.9rem;
   }
 
@@ -438,8 +438,9 @@
       grid-template-rows: 2rem minmax(0, 0fr);
       justify-content: center;
       align-items: center;
-      column-gap: 1rem;
+      column-gap: 0.5rem;
       row-gap: 0;
+      padding-inline-end: 0.5rem;
       transition:
         transform 0.3s ease,
         padding-block-end 0.25s ease,
@@ -463,7 +464,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.85rem;
       overflow: hidden;
       opacity: 0;
       visibility: hidden;
@@ -676,6 +677,30 @@
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
+  }
+
+  .title .prompt {
+    font-family: var(--font-mono);
+    color: var(--link-color);
+    margin-inline-end: 0.4em;
+  }
+
+  .title .cursor {
+    font-family: var(--font-mono);
+    color: var(--link-color);
+    margin-inline-start: 0.15em;
+    animation: cursor-blink 1.06s steps(1, end) infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .title .cursor {
+      animation: none;
+    }
   }
 
   .post-navigator {

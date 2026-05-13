@@ -1,12 +1,23 @@
-<a href="{{ "" | relURL }}" class="title">
-  <h2>{{ .Site.Title }}.</h2>
-</a>
-<nav id="site-nav">{{- partial "nav.html" . -}}</nav>
-<button
-  class="nav-toggle"
-  type="button"
-  aria-expanded="false"
-  aria-controls="site-nav"
->
-  <span class="nav-toggle-label">NAV</span>
-</button>
+<div class="dock">
+  <a href="{{ "" | relURL }}" class="title">
+    <h2>{{ .Site.Title }}.</h2>
+  </a>
+  <nav id="site-nav">{{- partial "nav.html" . -}}</nav>
+  <button
+    class="nav-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="site-nav"
+    aria-label="Toggle navigation"
+  >
+    <svg
+      class="nav-toggle-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z" />
+    </svg>
+  </button>
+</div>

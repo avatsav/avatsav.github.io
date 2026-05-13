@@ -2,15 +2,61 @@
   Simply place a custom_body.html into
   your local /layouts/partials-directory -->
 <script>
-  (function () {
-    const toggle = document.querySelector(".nav-toggle");
+  document.addEventListener("click", (event) => {
+    const toggle = event.target.closest(".nav-toggle");
+    if (!toggle) return;
     const nav = document.getElementById("site-nav");
-    if (!toggle || !nav) return;
-    const label = toggle.querySelector(".nav-toggle-label");
-    toggle.addEventListener("click", () => {
-      const open = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(open));
-      if (label) label.textContent = open ? "ESC" : "NAV";
-    });
+    if (!nav) return;
+    const open = nav.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+
+  // Hide the dock when scrolling down; reveal when scrolling up.
+  (function () {
+    const header = document.querySelector("header");
+    if (!header) return;
+    const THRESHOLD = 5; // ignore tiny scrolls
+    const TOP_OFFSET = 100; // always show within the top of the page
+    let lastY = Math.max(0, window.scrollY);
+    let ticking = false;
+
+    function closeNav() {
+      const nav = document.getElementById("site-nav");
+      const toggle = document.querySelector(".nav-toggle");
+      if (nav) nav.classList.remove("is-open");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+    }
+
+    function update() {
+      // Ignore iOS rubber-band overscroll frames (negative scrollY).
+      if (window.scrollY < 0) {
+        ticking = false;
+        return;
+      }
+      const y = window.scrollY;
+      const diff = y - lastY;
+      if (y < TOP_OFFSET) {
+        header.classList.remove("is-hidden");
+      } else if (diff > THRESHOLD) {
+        // Hiding: close the nav so it doesn't reappear still-expanded.
+        closeNav();
+        header.classList.add("is-hidden");
+      } else if (diff < -THRESHOLD) {
+        header.classList.remove("is-hidden");
+      }
+      lastY = y;
+      ticking = false;
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
   })();
 </script>

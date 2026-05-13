@@ -1,6 +1,6 @@
 {{ define "main" }}
   <div class="page-hero">
-    <h1>{{ .Title }}</h1>
+    <h1>{{ .Params.heading | default .Title }}</h1>
   </div>
   <article class="markdown-content">{{ .Content }}</article>
 

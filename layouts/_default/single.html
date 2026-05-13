@@ -5,16 +5,18 @@
   {{ else }}
     {{ if eq .Type "blog" }}
       {{ if not .Params.menu }}
-        <p class="eyebrow">
-          <time datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "2006-01-02" }}
-          </time>
-        </p>
-        <h1>
-          {{ if and (not $isPublished) hugo.IsDevelopment }}
-            [DRAFT]
-          {{ end }}{{ .Title }}
-        </h1>
+        <div class="page-hero">
+          <h1>
+            {{ if and (not $isPublished) hugo.IsDevelopment }}
+              [DRAFT]
+            {{ end }}{{ .Title }}
+          </h1>
+          <p class="post-date">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">
+              {{ .Date.Format "Jan 2, 2006" }}
+            </time>
+          </p>
+        </div>
       {{ end }}
     {{ end }}
     {{ if .Params.toc }}
@@ -36,12 +38,13 @@
 
     {{ end }}
 
-
-    <div class="tags-list">
-      {{ range (.GetTerms "tags") }}
-        <a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
-        &nbsp;
-      {{ end }}
-    </div>
+    {{ with .GetTerms "tags" }}
+      <div class="tags-list">
+        {{ range . }}
+          <a href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
+          &nbsp;
+        {{ end }}
+      </div>
+    {{ end }}
   {{ end }}
 {{ end }}

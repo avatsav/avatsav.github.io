@@ -1,14 +1,18 @@
 {{ define "main" }}
   <section>
-    {{ if .Data.Singular }}
-      <p class="eyebrow">
-        Filter: {{ .Title }}
-        · <a href="{{ "blog" | relURL }}">Remove</a>
-      </p>
-      <h1>Blog</h1>
-    {{ else }}
-      <h1>{{ .Title }}</h1>
-    {{ end }}
+    <div class="page-hero">
+      {{ if .Data.Singular }}
+        <h1>Blog</h1>
+        <p class="filter">
+          Filter:
+          {{ .Title }}
+          ·
+          <a href="{{ "blog" | relURL }}">Remove</a>
+        </p>
+      {{ else }}
+        <h1>{{ .Title }}</h1>
+      {{ end }}
+    </div>
     {{ $pages := .Pages }}
     {{ if gt (len $pages) 0 }}
       {{ range $pages.GroupByDate "2006" }}
@@ -31,7 +35,7 @@
                   {{ end }}{{ .Title }}
                 </a>
                 <time datetime="{{ .Date.Format "2006-01-02" }}">
-                  {{ .Date.Format "2006-01-02" }}
+                  {{ .Date.Format "Jan 2" }}
                 </time>
               </li>
             {{ end }}

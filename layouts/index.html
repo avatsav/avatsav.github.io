@@ -1,4 +1,7 @@
 {{ define "main" }}
+  <div class="page-hero">
+    <h1>{{ .Title }}</h1>
+  </div>
   <article class="markdown-content">{{ .Content }}</article>
 
   {{ $blogPosts := first 10 (where (where .Site.RegularPages "Section" "blog") ".Params.isPublished" "ne" false) }}
@@ -9,7 +12,7 @@
         <li>
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           <time datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "2006-01-02" }}
+            {{ .Date.Format "Jan 2, 2006" }}
           </time>
         </li>
       {{ end }}

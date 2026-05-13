@@ -1,4 +1,6 @@
-{{- $bg := "#0f1117" -}} {{- $text := "#c9cdd8" -}} {{- $link := "#8c9dd4" -}}
+{{- $bg := "#0f1117" -}}
+{{- $text := "#c9cdd8" -}}
+{{- $link := "#8c9dd4" -}}
 <style>
   /* ===== Self-hosted Fonts ===== */
   /* Inter — rsms.me/inter defaults */
@@ -103,6 +105,7 @@
     background: var(--bg-color);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    font-feature-settings: "cv11" 1, "cv05" 1;
   }
 
   ::selection {
@@ -117,7 +120,7 @@
   }
 
   body {
-    font-family: var(--font-main), sans-serif;
+    font-family: var(--font-main);
     font-size: var(--font-scale);
     line-height: 1.6;
     color: var(--text-color);
@@ -129,14 +132,13 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    word-wrap: break-word;
     overflow-wrap: break-word;
     text-rendering: optimizeLegibility;
   }
 
   main {
     line-height: 1.6;
-    padding-block-start: 3rem;
+    padding-block-start: 4.5rem;
     flex: 1;
   }
 
@@ -147,58 +149,54 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-mono);
+    font-family: var(--font-main);
     font-synthesis: none;
     color: var(--text-color);
     margin-block: 2rem 0.75rem;
-    letter-spacing: 0;
-    line-height: 1.3;
-    font-weight: 600;
+    letter-spacing: -0.011em;
+    line-height: 1.25;
+    font-weight: 510;
     text-wrap: balance;
     page-break-after: avoid;
   }
 
-  /* Article-body headings get a top divider (h2 and below) */
-  .markdown-content :is(h2, h3, h4, h5, h6) {
-    margin-block-start: 2.5rem;
-    padding-block-start: 1.5rem;
-    border-block-start: 1px solid var(--border);
-  }
-
-  /* Divider between post title and article body */
-  h1 + .markdown-content {
-    margin-block-start: 2rem;
-    padding-block-start: 1rem;
-    border-block-start: 1px solid var(--border);
-  }
-
   h1 {
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    line-height: 1.15;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.028em;
+    font-weight: 510;
   }
 
   h2 {
-    font-size: 1.5rem;
-    text-transform: uppercase;
+    font-size: 1.125rem;
+    font-weight: 560;
   }
 
   h3 {
-    font-size: 1.15rem;
+    font-size: 1rem;
+    font-weight: 500;
   }
 
   h4 {
     font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  /* Generous breathing room between article sections */
+  .markdown-content h2 {
+    margin-block-start: 4rem;
+  }
+
+  .markdown-content h3 {
+    margin-block-start: 2.5rem;
+  }
+
+  .markdown-content h4 {
+    margin-block-start: 2rem;
   }
 
   p {
     margin-block: var(--space);
-  }
-
-  h1 + p {
-    margin-block: 0 var(--space);
   }
 
   .markdown-content a:hover {
@@ -207,11 +205,20 @@
     text-decoration: none;
   }
 
-  .markdown-content a[href^="http"]::after {
-    content: " ↗";
+  /* External-link marker — applies site-wide (body, footer, etc.) */
+  a[href^="http"]::after {
+    content: "↗";
     font-family: var(--font-mono);
     display: inline-block;
-    transform: translateY(-0.2em);
+    margin-inline-start: 0.25em;
+    font-size: 0.85em;
+    letter-spacing: normal;
+    transform: translateY(-0.15em);
+  }
+
+  /* Suppress arrow on links that opt out (e.g. site title, logos) */
+  a.no-arrow[href^="http"]::after {
+    content: none;
   }
 
   .markdown-content :is(p, li, blockquote, figcaption, td, th, dd) {
@@ -235,14 +242,49 @@
     letter-spacing: 0.05em;
   }
 
-  /* Small caption above an h1 (date, filter, category, etc.) */
-  .eyebrow {
+  /* Centered hero block above any main page heading (post, list, 404, home) */
+  .page-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    margin-block: 2rem 4rem;
+  }
+
+  .page-hero h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-wrap: balance;
+  }
+
+  /* Reset filter's default margin when inside a hero (gap handles spacing) */
+  .page-hero .filter {
+    margin: 0;
+  }
+
+  .post-date {
+    margin: 0;
     font-family: var(--font-mono);
     font-size: var(--font-label);
     color: var(--muted-text-color);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-block-end: 1.5rem;
+  }
+
+  .post-date time {
+    text-transform: inherit;
+    letter-spacing: inherit;
+    font-size: inherit;
+  }
+
+  /* Filter chip shown under a page heading (e.g. tag filter on the blog list) */
+  .filter {
+    font-family: var(--font-mono);
+    font-size: var(--font-label);
+    color: var(--muted-text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
 
@@ -278,6 +320,8 @@
 
   .nav-toggle {
     display: none;
+    align-items: center;
+    gap: 0.4em;
     background: none;
     border: 1px solid var(--border);
     color: var(--muted-text-color);
@@ -288,6 +332,17 @@
     cursor: pointer;
   }
 
+  .nav-toggle::after {
+    content: "▾";
+    display: inline-block;
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+
+  .nav-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+  }
+
   .nav-toggle:hover {
     color: var(--text-color);
     border-color: var(--text-color);
@@ -296,7 +351,7 @@
   /* ===== Header Layout ===== */
   header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
@@ -304,7 +359,25 @@
     position: sticky;
     top: 0;
     z-index: 20;
+    background: transparent;
+  }
+
+  /* Edge-to-edge translucent backdrop behind the header */
+  header::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    /* Solid fallback for browsers without backdrop-filter */
     background: var(--bg-color);
+    background: color-mix(in oklch, var(--bg-color) 65%, transparent);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    transform: translateX(-50%);
+    z-index: -1;
+    pointer-events: none;
   }
 
   header::after {
@@ -324,7 +397,7 @@
 
   @media (max-width: 600px) {
     .nav-toggle {
-      display: inline-block;
+      display: inline-flex;
     }
 
     header nav {
@@ -338,7 +411,11 @@
       left: 50%;
       width: 100vw;
       transform: translateX(-50%);
+      /* Solid fallback for browsers without backdrop-filter */
       background: var(--bg-color);
+      background: color-mix(in oklch, var(--bg-color) 75%, transparent);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
       flex-direction: column;
       align-items: center;
       padding: 2rem 1rem;
@@ -361,8 +438,7 @@
 
   :is(ol, ul) li::marker {
     font-family: var(--font-mono);
-    font-size: var(--font-label);
-    color: var(--muted-text-color);
+    color: var(--link-color);
   }
 
   li + li {
@@ -429,6 +505,17 @@
   .highlight pre code {
     display: inline-block;
     min-width: 100%;
+  }
+
+  /* Edge-to-edge code blocks on mobile: cancel body's 20px inline padding */
+  @media (max-width: 600px) {
+    .highlight {
+      margin-inline: -20px;
+    }
+
+    .highlight pre {
+      border-radius: 0;
+    }
   }
 
   mark {
@@ -537,7 +624,7 @@
     margin-block-start: 4rem;
     padding-block: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: baseline;
     gap: 1rem;
     position: relative;
@@ -596,10 +683,7 @@
         color: var(--text-color);
         text-decoration: none;
         flex: 1 1 auto;
-        font-family: var(--font-mono);
-        font-size: var(--font-small);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        font-weight: 500;
       }
 
       & a:visited {

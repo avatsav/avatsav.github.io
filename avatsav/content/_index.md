@@ -1,8 +1,6 @@
 +++
-title = "Home"
+title = "Hi, I'm Abhi"
 +++
-
-# Hi, I'm Abhi
 
 This is my personal logbook. A place where I capture thoughts, learnings and reflections. Here you'll find posts related to programming, cycling, or whatever I'm hyperfocused on at the moment.
 

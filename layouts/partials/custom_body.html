@@ -6,10 +6,11 @@
     const toggle = document.querySelector(".nav-toggle");
     const nav = document.getElementById("site-nav");
     if (!toggle || !nav) return;
+    const label = toggle.querySelector(".nav-toggle-label");
     toggle.addEventListener("click", () => {
       const open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.textContent = open ? "ESC" : "NAV";
+      if (label) label.textContent = open ? "ESC" : "NAV";
     });
   })();
 </script>

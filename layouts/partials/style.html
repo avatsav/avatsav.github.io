@@ -783,18 +783,56 @@
 
   /* ===== Latest Post Card (home page) ===== */
   .latest-post {
+    position: relative;
     display: block;
     margin-block: var(--space) 2rem;
     padding: 1.5rem;
-    border: 1px solid var(--border);
     border-radius: var(--radius);
     color: var(--text-color);
     text-decoration: none;
-    transition: border-color 0.15s ease;
+    /* Lift off the page: same shadow as the dock */
+    box-shadow:
+      0 12px 32px -10px rgba(0, 0, 0, 0.55),
+      0 4px 12px -6px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Beveled gradient ring (matches the dock) */
+  .latest-post::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--text-color) 25%, transparent),
+      color-mix(in oklch, var(--text-color) 8%, transparent) 40%,
+      color-mix(in oklch, var(--text-color) 12%, transparent) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: background 0.3s ease;
+  }
+
+  /* Brighten the ring with the accent color on hover */
+  .latest-post:hover::before {
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--link-color) 70%, transparent),
+      color-mix(in oklch, var(--link-color) 40%, transparent) 40%,
+      color-mix(in oklch, var(--link-color) 55%, transparent) 100%
+    );
   }
 
   .latest-post:hover {
-    border-color: var(--link-color);
     text-decoration: none;
   }
 

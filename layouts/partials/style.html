@@ -48,11 +48,7 @@
     font-style: normal;
     font-weight: 400 600;
     font-display: swap;
-    src: url("/fonts/JetBrainsMono-latin.woff2") format("woff2");
-    unicode-range:
-      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-      U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
-      U+2212, U+2215, U+FEFF, U+FFFD;
+    src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
   }
 
   /* ===== CSS Variables ===== */
@@ -366,6 +362,28 @@
     margin-block-start: 1rem;
     pointer-events: none;
     height: 2.25rem;
+    /* Soft top-down highlight across the header band, mirroring the
+       drop shadow below the dock. Painted as a ::before so it can
+       extend wider than the header's natural box. */
+  }
+
+  header::before {
+    content: "";
+    position: absolute;
+    inset-block-start: -1rem;
+    inset-inline: 0;
+    height: 5rem;
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      rgba(255, 255, 255, 0.035),
+      transparent 70%
+    );
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  header.is-hidden::before {
+    opacity: 0;
   }
 
   /* Floating dock pill: contains title + nav + (mobile) toggle */
@@ -381,7 +399,7 @@
     max-width: calc(100vw - 2rem);
     display: flex;
     align-items: center;
-    gap: 1.75rem;
+    gap: 1rem;
     padding: 0.375rem 1rem;
     /* Border is drawn by ::before as a gradient ring (see below). */
     /* Fixed radius. Browser clamps it to half-height when closed, so the

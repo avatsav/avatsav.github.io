@@ -362,28 +362,6 @@
     margin-block-start: 1rem;
     pointer-events: none;
     height: 2.25rem;
-    /* Soft top-down highlight across the header band, mirroring the
-       drop shadow below the dock. Painted as a ::before so it can
-       extend wider than the header's natural box. */
-  }
-
-  header::before {
-    content: "";
-    position: absolute;
-    inset-block-start: -1rem;
-    inset-inline: 0;
-    height: 5rem;
-    background: radial-gradient(
-      ellipse at 50% 0%,
-      rgba(255, 255, 255, 0.035),
-      transparent 70%
-    );
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  header.is-hidden::before {
-    opacity: 0;
   }
 
   /* Floating dock pill: contains title + nav + (mobile) toggle */
@@ -430,7 +408,7 @@
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(
-      180deg,
+      135deg,
       color-mix(in oklch, var(--text-color) 25%, transparent),
       color-mix(in oklch, var(--text-color) 8%, transparent) 40%,
       color-mix(in oklch, var(--text-color) 12%, transparent) 100%

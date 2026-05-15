@@ -797,7 +797,7 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
-  /* Beveled gradient ring (matches the dock) */
+  /* Beveled gradient ring (matches the dock) — base layer */
   .latest-post::before {
     content: "";
     position: absolute;
@@ -819,17 +819,37 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-    transition: background 0.3s ease;
   }
 
-  /* Brighten the ring with the accent color on hover */
-  .latest-post:hover::before {
+  /* Accent ring stacked on top, faded in on hover so the highlight
+     animates smoothly (gradient-image interpolation is unreliable). */
+  .latest-post::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
     background: linear-gradient(
       135deg,
       color-mix(in oklch, var(--link-color) 70%, transparent),
       color-mix(in oklch, var(--link-color) 40%, transparent) 40%,
       color-mix(in oklch, var(--link-color) 55%, transparent) 100%
     );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .latest-post:hover::after {
+    opacity: 1;
   }
 
   .latest-post:hover {

@@ -57,6 +57,7 @@
     --width: 720px;
     --space: 1.5rem;
     --radius: 5px;
+    --radius-card: 10px;
 
     /* Typography */
     --font-main: Inter, sans-serif;
@@ -350,6 +351,82 @@
     color: var(--text-color);
   }
 
+  /* ===== Lit Surface ===== */
+  /* Glass surface with a beveled gradient ring; on hover the ring shifts
+     to a periwinkle accent and a subtle inner glow blooms from the edge,
+     as if the ring were a light source. Composes with any element that
+     supplies its own size, padding, and border-radius (e.g. .dock,
+     .latest-post). */
+  .lit-surface {
+    position: relative;
+    box-shadow:
+      0 12px 32px -10px rgba(0, 0, 0, 0.55),
+      0 4px 12px -6px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.4s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .lit-surface::before,
+  .lit-surface::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Base bevel ring */
+  .lit-surface::before {
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--text-color) 25%, transparent),
+      color-mix(in oklch, var(--text-color) 8%, transparent) 40%,
+      color-mix(in oklch, var(--text-color) 12%, transparent) 100%
+    );
+  }
+
+  /* Accent ring — faded in on hover (gradient interpolation is unreliable,
+     so we stack and crossfade). */
+  .lit-surface::after {
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--link-color) 70%, transparent),
+      color-mix(in oklch, var(--link-color) 40%, transparent) 40%,
+      color-mix(in oklch, var(--link-color) 55%, transparent) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .lit-surface:hover::after {
+    opacity: 1;
+  }
+
+  /* Subtle periwinkle wash from the lit ring on hover */
+  .lit-surface:hover {
+    box-shadow:
+      0 12px 32px -10px rgba(0, 0, 0, 0.55),
+      0 4px 12px -6px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 18px -2px color-mix(in oklch, var(--link-color) 22%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lit-surface,
+    .lit-surface::after {
+      transition: none;
+    }
+  }
+
   /* ===== Header Layout ===== */
   /* Header reserves a fixed amount of layout space matching the *closed*
      dock. The dock itself is absolutely positioned inside, so when it
@@ -379,7 +456,7 @@
     align-items: center;
     gap: 1rem;
     padding: 0.375rem 1rem;
-    /* Border is drawn by ::before as a gradient ring (see below). */
+    /* Border is drawn by .lit-surface as a gradient ring. */
     /* Fixed radius. Browser clamps it to half-height when closed, so the
        dock looks pill-shaped; as the dock grows on expand, the radius
        stays the same and reads as a rounded square. */
@@ -389,39 +466,12 @@
     background: color-mix(in oklch, var(--bg-color) 65%, transparent);
     backdrop-filter: blur(12px) saturate(140%);
     -webkit-backdrop-filter: blur(12px) saturate(140%);
-    /* Lift the glass off the page: soft drop shadow + faint inner
-       top-edge highlight to suggest light catching the bevel. */
-    box-shadow:
-      0 12px 32px -10px rgba(0, 0, 0, 0.55),
-      0 4px 12px -6px rgba(0, 0, 0, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
     pointer-events: auto;
-    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
-  }
-
-  /* Beveled gradient ring: brighter at the top edge (highlight),
-     fading through neutral to darker at the bottom (shadow). */
-  .dock::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklch, var(--text-color) 25%, transparent),
-      color-mix(in oklch, var(--text-color) 8%, transparent) 40%,
-      color-mix(in oklch, var(--text-color) 12%, transparent) 100%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+    /* Extends .lit-surface's box-shadow transition with transform for
+       the fast-return slide. */
+    transition:
+      transform 0.4s cubic-bezier(0.2, 0, 0, 1),
+      box-shadow 0.4s cubic-bezier(0.2, 0, 0, 1);
   }
 
   /* Fast-return: hide the dock by sliding it up when scrolling down */
@@ -470,6 +520,7 @@
       padding-inline-end: 0.5rem;
       transition:
         transform 0.4s cubic-bezier(0.2, 0, 0, 1),
+        box-shadow 0.4s cubic-bezier(0.2, 0, 0, 1),
         padding-block-end 0.4s cubic-bezier(0.2, 0, 0, 1),
         grid-template-rows 0.4s cubic-bezier(0.2, 0, 0, 1),
         row-gap 0.4s cubic-bezier(0.2, 0, 0, 1);
@@ -577,14 +628,15 @@
   }
 
   :not(pre) > code {
-    padding: 2px 4px;
+    padding: 1px 4px;
     border-radius: var(--radius);
     background: var(--code-bg);
+    border: 1px solid color-mix(in oklch, var(--link-color) 30%, transparent);
   }
 
   .highlight pre {
     padding: 1rem 0;
-    border-radius: var(--radius);
+    border-radius: var(--radius-card);
     display: block;
     overflow-x: auto;
   }
@@ -620,7 +672,7 @@
     margin: 0 2px;
     font-size: calc(var(--font-scale) * 0.95);
     border: 1px solid var(--link-color);
-    border-radius: 4px;
+    border-radius: var(--radius);
     display: inline-block;
     transform: perspective(200px) rotateX(12deg);
     box-shadow:
@@ -632,7 +684,7 @@
   img {
     max-width: 100%;
     height: auto;
-    border-radius: var(--radius);
+    border-radius: var(--radius-card);
   }
 
   figure {
@@ -783,73 +835,12 @@
 
   /* ===== Latest Post Card (home page) ===== */
   .latest-post {
-    position: relative;
     display: block;
     margin-block: var(--space) 2rem;
     padding: 1.5rem;
-    border-radius: var(--radius);
+    border-radius: var(--radius-card);
     color: var(--text-color);
     text-decoration: none;
-    /* Lift off the page: same shadow as the dock */
-    box-shadow:
-      0 12px 32px -10px rgba(0, 0, 0, 0.55),
-      0 4px 12px -6px rgba(0, 0, 0, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  /* Beveled gradient ring (matches the dock) — base layer */
-  .latest-post::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklch, var(--text-color) 25%, transparent),
-      color-mix(in oklch, var(--text-color) 8%, transparent) 40%,
-      color-mix(in oklch, var(--text-color) 12%, transparent) 100%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  /* Accent ring stacked on top, faded in on hover so the highlight
-     animates smoothly (gradient-image interpolation is unreliable). */
-  .latest-post::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklch, var(--link-color) 70%, transparent),
-      color-mix(in oklch, var(--link-color) 40%, transparent) 40%,
-      color-mix(in oklch, var(--link-color) 55%, transparent) 100%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s cubic-bezier(0.2, 0, 0, 1);
-  }
-
-  .latest-post:hover::after {
-    opacity: 1;
   }
 
   .latest-post:hover {
@@ -960,7 +951,7 @@
     margin-block: var(--space);
     padding: 1rem;
     background: var(--surface-color);
-    border-radius: var(--radius);
+    border-radius: var(--radius-card);
     font-size: var(--font-small);
 
     & summary {

@@ -8,7 +8,7 @@
   {{ with first 1 $blogPosts }}
     <h2>Latest post</h2>
     {{ range . }}
-      <a class="latest-post" href="{{ .RelPermalink }}">
+      <a class="latest-post lit-surface" href="{{ .RelPermalink }}">
         <h3 class="latest-post-title">{{ .Title }}</h3>
         <p class="latest-post-excerpt">
           {{ with .Params.description }}

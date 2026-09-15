@@ -51,6 +51,14 @@
     src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
   }
 
+  @font-face {
+    font-family: "Stack Sans Notch";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/fonts/StackSansNotch-SemiBold.ttf") format("truetype");
+  }
+
   /* ===== CSS Variables ===== */
   :root {
     /* Layout */
@@ -61,6 +69,7 @@
 
     /* Typography */
     --font-main: Inter, sans-serif;
+    --font-heading: "Stack Sans Notch", var(--font-main);
     --font-mono: "JetBrains Mono", monospace;
     --font-scale: 1.04em;
     --font-small: 0.9rem;
@@ -146,13 +155,13 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-main);
+    font-family: var(--font-heading);
     font-synthesis: none;
     color: var(--text-color);
     margin-block: 2rem 0.75rem;
-    letter-spacing: -0.011em;
+    letter-spacing: 0.018em;
     line-height: 1.25;
-    font-weight: 510;
+    font-weight: 600;
     text-wrap: balance;
     page-break-after: avoid;
   }
@@ -160,23 +169,23 @@
   h1 {
     font-size: 1.5rem;
     line-height: 1.2;
-    letter-spacing: -0.028em;
-    font-weight: 510;
+    letter-spacing: 0.01em;
+    font-weight: 600;
   }
 
   h2 {
     font-size: 1.125rem;
-    font-weight: 560;
+    font-weight: 600;
   }
 
   h3 {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   h4 {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   /* Generous breathing room between article sections (and after markdown blocks) */
@@ -892,8 +901,10 @@
 
   .latest-post-title {
     margin: 0 0 0.5rem;
+    font-family: var(--font-heading);
     font-size: 1.25rem;
-    font-weight: 560;
+    font-weight: 600;
+    letter-spacing: 0.018em;
   }
 
   .latest-post-excerpt {
@@ -938,7 +949,9 @@
         color: var(--text-color);
         text-decoration: none;
         flex: 1 1 auto;
-        font-weight: 500;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        letter-spacing: 0.018em;
       }
 
       & a:visited {

@@ -185,14 +185,14 @@
     text-decoration: none;
   }
 
-  /* Persistent, dimmed accent anchor — brightens on hover or focus. */
+  /* § anchor link next to article headings — fades in on hover */
   .heading-link {
     display: inline-block;
     width: 1.25em;
     margin-inline-start: -1.25em;
-    color: var(--link-color);
+    color: var(--muted-text-color);
     text-decoration: none;
-    opacity: 0.45;
+    opacity: 0;
     transition: opacity 0.2s ease;
   }
 
@@ -201,7 +201,7 @@
     opacity: 1;
   }
 
-  /* Keep heading anchors free of the reverse-video body-link hover. */
+  /* Override the markdown-content reverse-video link hover for the § */
   .markdown-content .heading-link:hover {
     background: transparent;
     color: var(--link-color);

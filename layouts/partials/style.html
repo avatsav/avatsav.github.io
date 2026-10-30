@@ -3,44 +3,13 @@
 {{- $link := "#8c9dd4" -}}
 <style>
   /* ===== Self-hosted Fonts ===== */
-  /* Inter — rsms.me/inter defaults */
   @font-face {
-    font-family: InterVariable;
+    font-family: "Geist Serif";
     font-style: normal;
-    font-weight: 100 900;
+    font-weight: 400;
+    font-variation-settings: "ELSH" 0;
     font-display: swap;
-    src: url("/fonts/InterVariable.woff2") format("woff2");
-  }
-
-  @font-feature-values InterVariable {
-    @character-variant {
-      cv01: 1; cv02: 2; cv03: 3; cv04: 4; cv05: 5; cv06: 6; cv07: 7; cv08: 8;
-      cv09: 9; cv10: 10; cv11: 11; cv12: 12; cv13: 13;
-      alt-1: 1;            /* Alternate one */
-      alt-3: 9;            /* Flat-top three */
-      open-4: 2;           /* Open four */
-      open-6: 3;           /* Open six */
-      open-9: 4;           /* Open nine */
-      lc-l-with-tail: 5;   /* Lower-case L with tail */
-      simplified-u: 6;     /* Simplified u */
-      alt-double-s: 7;     /* Alternate German double s */
-      uc-i-with-serif: 8;  /* Upper-case i with serif */
-      uc-g-with-spur: 10;  /* Capital G with spur */
-      single-story-a: 11;  /* Single-story a */
-      compact-lc-f: 12;    /* Compact f */
-      compact-lc-t: 13;    /* Compact t */
-    }
-    @styleset {
-      ss01: 1; ss02: 2; ss03: 3; ss04: 4; ss05: 5; ss06: 6; ss07: 7; ss08: 8;
-      open-digits: 1;                /* Open digits */
-      disambiguation: 2;             /* Disambiguation (with zero) */
-      disambiguation-except-zero: 4; /* Disambiguation (no zero) */
-      round-quotes-and-commas: 3;    /* Round quotes & commas */
-      square-punctuation: 7;         /* Square punctuation */
-      square-quotes: 8;              /* Square quotes */
-      circled-characters: 5;         /* Circled characters */
-      squared-characters: 6;         /* Squared characters */
-    }
+    src: url('{{ "fonts/geist/GeistSerifVF.woff2" | relURL }}') format("woff2");
   }
 
   @font-face {
@@ -52,11 +21,19 @@
   }
 
   @font-face {
-    font-family: "Stack Sans Notch";
+    font-family: "Geist Sans";
     font-style: normal;
-    font-weight: 600;
+    font-weight: 100 900;
     font-display: swap;
-    src: url("/fonts/StackSansNotch-SemiBold.ttf") format("truetype");
+    src: url('{{ "fonts/geist/Geist.woff2" | relURL }}') format("woff2");
+  }
+
+  @font-face {
+    font-family: "Geist Sans";
+    font-style: italic;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('{{ "fonts/geist/Geist-Italic.woff2" | relURL }}') format("woff2");
   }
 
   /* ===== CSS Variables ===== */
@@ -68,8 +45,10 @@
     --radius-card: 10px;
 
     /* Typography */
-    --font-main: Inter, sans-serif;
-    --font-heading: "Stack Sans Notch", var(--font-main);
+    --font-main: "Geist Sans", Arial, sans-serif;
+    --font-heading: var(--font-main);
+    --font-title: "Geist Serif", Georgia, serif;
+    --title-letter-spacing: normal;
     --font-mono: "JetBrains Mono", monospace;
     --font-scale: 1.04em;
     --font-small: 0.9rem;
@@ -92,13 +71,6 @@
     --code-bg: color-mix(in oklch, var(--link-color) 12%, var(--bg-color));
   }
 
-  /* Use InterVariable for the primary sans stack when supported */
-  @supports (font-variation-settings: normal) {
-    :root {
-      --font-main: InterVariable, sans-serif;
-    }
-  }
-
   /* ===== Base Styles ===== */
 
   *,
@@ -111,7 +83,6 @@
     background: var(--bg-color);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    font-feature-settings: "cv11" 1, "cv05" 1;
   }
 
   ::selection {
@@ -127,6 +98,7 @@
 
   body {
     font-family: var(--font-main);
+    font-weight: 400;
     font-size: var(--font-scale);
     line-height: 1.6;
     color: var(--text-color);
@@ -170,22 +142,18 @@
     font-size: 1.5rem;
     line-height: 1.2;
     letter-spacing: 0.01em;
-    font-weight: 600;
   }
 
   h2 {
     font-size: 1.125rem;
-    font-weight: 600;
   }
 
   h3 {
     font-size: 1rem;
-    font-weight: 600;
   }
 
   h4 {
     font-size: 1rem;
-    font-weight: 600;
   }
 
   /* Generous breathing room between article sections (and after markdown blocks) */
@@ -217,14 +185,14 @@
     text-decoration: none;
   }
 
-  /* § anchor link next to article headings — fades in on hover */
+  /* Persistent, dimmed accent anchor — brightens on hover or focus. */
   .heading-link {
     display: inline-block;
     width: 1.25em;
     margin-inline-start: -1.25em;
-    color: var(--muted-text-color);
+    color: var(--link-color);
     text-decoration: none;
-    opacity: 0;
+    opacity: 0.45;
     transition: opacity 0.2s ease;
   }
 
@@ -233,7 +201,7 @@
     opacity: 1;
   }
 
-  /* Override the markdown-content reverse-video link hover for the § */
+  /* Keep heading anchors free of the reverse-video body-link hover. */
   .markdown-content .heading-link:hover {
     background: transparent;
     color: var(--link-color);
@@ -287,6 +255,9 @@
   }
 
   .page-hero h1 {
+    font-family: var(--font-title);
+    font-weight: 400;
+    letter-spacing: var(--title-letter-spacing);
     margin: 0;
     font-size: 1.5rem;
     text-wrap: balance;
@@ -901,10 +872,10 @@
 
   .latest-post-title {
     margin: 0 0 0.5rem;
-    font-family: var(--font-heading);
+    font-family: var(--font-title);
     font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0.018em;
+    font-weight: 400;
+    letter-spacing: var(--title-letter-spacing);
   }
 
   .latest-post-excerpt {
@@ -949,9 +920,9 @@
         color: var(--text-color);
         text-decoration: none;
         flex: 1 1 auto;
-        font-family: var(--font-heading);
-        font-weight: 600;
-        letter-spacing: 0.018em;
+        font-family: var(--font-title);
+        font-weight: 400;
+        letter-spacing: var(--title-letter-spacing);
       }
 
       & a:visited {

@@ -4,12 +4,11 @@
 <style>
   /* ===== Self-hosted Fonts ===== */
   @font-face {
-    font-family: "Geist Serif";
+    font-family: "Allo";
     font-style: normal;
-    font-weight: 400;
-    font-variation-settings: "ELSH" 0;
+    font-weight: 100 900;
     font-display: swap;
-    src: url('{{ "fonts/geist/GeistSerifVF.woff2" | relURL }}') format("woff2");
+    src: url('{{ "fonts/allo/allo-variable.woff2" | relURL }}') format("woff2");
   }
 
   @font-face {
@@ -21,19 +20,19 @@
   }
 
   @font-face {
-    font-family: "Geist Sans";
-    font-style: normal;
-    font-weight: 100 900;
+    font-family: "Allo";
+    font-style: italic;
+    font-weight: 400;
     font-display: swap;
-    src: url('{{ "fonts/geist/Geist.woff2" | relURL }}') format("woff2");
+    src: url('{{ "fonts/allo/allo-oblique.woff2" | relURL }}') format("woff2");
   }
 
   @font-face {
-    font-family: "Geist Sans";
+    font-family: "Allo";
     font-style: italic;
-    font-weight: 100 900;
+    font-weight: 600;
     font-display: swap;
-    src: url('{{ "fonts/geist/Geist-Italic.woff2" | relURL }}') format("woff2");
+    src: url('{{ "fonts/allo/allo-semi-bold-oblique.woff2" | relURL }}') format("woff2");
   }
 
   /* ===== CSS Variables ===== */
@@ -45,9 +44,9 @@
     --radius-card: 10px;
 
     /* Typography */
-    --font-main: "Geist Sans", Arial, sans-serif;
+    --font-main: "Allo", system-ui, sans-serif;
     --font-heading: var(--font-main);
-    --font-title: "Geist Serif", Georgia, serif;
+    --font-title: var(--font-main);
     --title-letter-spacing: normal;
     --font-mono: "JetBrains Mono", monospace;
     --font-scale: 1.04em;
@@ -99,6 +98,7 @@
   body {
     font-family: var(--font-main);
     font-weight: 400;
+    font-optical-sizing: auto;
     font-size: var(--font-scale);
     line-height: 1.6;
     color: var(--text-color);
@@ -128,6 +128,7 @@
   h5,
   h6 {
     font-family: var(--font-heading);
+    font-variation-settings: "ROND" 35;
     font-synthesis: none;
     color: var(--text-color);
     margin-block: 2rem 0.75rem;
@@ -207,15 +208,11 @@
     color: var(--link-color);
   }
 
-  /* External-link marker — applies site-wide (body, footer, etc.) */
+  /* Use Allo's native U+2197 glyph for external links. */
   a[href^="http"]::after {
-    content: "↗";
-    font-family: var(--font-mono);
-    display: inline-block;
+    content: "\2197";
+    font-family: var(--font-main);
     margin-inline-start: 0.25em;
-    font-size: 0.85em;
-    letter-spacing: normal;
-    transform: translateY(-0.15em);
   }
 
   /* Suppress arrow on links that opt out (e.g. site title, logos) */
@@ -256,7 +253,7 @@
 
   .page-hero h1 {
     font-family: var(--font-title);
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: var(--title-letter-spacing);
     margin: 0;
     font-size: 1.5rem;
@@ -725,6 +722,13 @@
   }
 
   /* ===== Interactive Elements ===== */
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
   button {
     margin: 0;
     cursor: pointer;
@@ -921,6 +925,7 @@
         text-decoration: none;
         flex: 1 1 auto;
         font-family: var(--font-title);
+        font-variation-settings: "ROND" 35;
         font-weight: 400;
         letter-spacing: var(--title-letter-spacing);
       }
